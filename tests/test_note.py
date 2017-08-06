@@ -1,6 +1,6 @@
 import pytest
 
-from music_basics import Note
+from music_essentials import Note
 
 # Manual note creation - correct values
 def test_manual_note_creation_correct_pitch_uppercase():
