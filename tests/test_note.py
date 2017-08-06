@@ -53,6 +53,10 @@ def test_manual_note_creation_incorrect_pitch_lowercase():
     with pytest.raises(ValueError):
         n = Note('p', 4, 'b')
 
+def test_manual_note_creation_incorrect_pitch_integer():
+    with pytest.raises(ValueError):
+        n = Note(7, 4, 'b')
+
 def test_manual_note_creation_invalid_octave():
     with pytest.raises(ValueError):
         n = Note('A', 'y', '##')
