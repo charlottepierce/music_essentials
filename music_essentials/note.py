@@ -1,30 +1,25 @@
 class Note(object):
-    """A single note, defined by a pitch, octave, and (optional) accidentals.
-
-    Attributes
-    ----------
-    VALID_PITCHES : tuple
-        List of valid pitch characters.
-    VALID_ACCIDENTALS : tuple
-        List of valid accidental representors.
-    """
+    """A single note, defined by a pitch, octave, and (optional) accidentals."""
 
     VALID_PITCHES = ('C', 'D', 'E', 'F', 'G', 'A', 'B')
+    """List of valid pitch characters."""
+
     VALID_ACCIDENTALS = ('#', '##', 'b', 'bb')
+    """List of valid accidental representors."""
 
     def __init__(self, pitch, octave, accidental=None):
         """Create a new Note.
 
         Args:
             pitch : str
-                The pitch of the note. Should be one of VALID_PITCHES, but can
+                The pitch of the note. Should be one of:attr:`~music_essentials.note.Note.VALID_PITCHES`, but can
                 be upper or lower case.
             octave : int
                 The octave of the note. Should be in the range [-1, 9].
 
         Kwags:
             accidental : str (default None)
-                The accidental to apply to the note. Should be one of VALID_ACCIDENTALS.
+                The accidental to apply to the note. Should be one of :attr:`~music_essentials.note.Note.VALID_ACCIDENTALS`.
 
         Returns:
             Note
@@ -75,15 +70,17 @@ class Note(object):
     def from_note_string(cls, note_string):
         """Create a new Note.
 
+        Processes the note string then uses the constructor :attr:`~music_essentials.note.Note.__init__()`
+
         Args:
             note_string : str
-                A string representing the note to create. Should be in the form
-                <pitch><octave><accidental>
+                A string representing the note to create. Should be in the form:
+                    ``<pitch><octave><accidental>``
                 
                 The pitch of the note should be one of VALID_PITCHES, but can
                 be upper or lower case.
 
-                The octave of the note should be in the range [-1, 9].
+                The octave of the note should be in the range ``[-1, 9]``.
 
                 The accidental is optional, but if used should be one of VALID_ACCIDENTALS.
 
@@ -115,6 +112,19 @@ class Note(object):
         return cls(pitch, octave, accidental)
 
     def __str__(self):
+        """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
+        
+        Examples:
+            >>> n = Note('B', 9, '#')
+            >>> print(n)
+            B9#
+            >>> n = Note('g', 7)
+            >>> print(n)
+            G7
+            >>> n = Note('D', 3, 'B')
+            >>> print(n)
+            D3b
+        """
         s = self.pitch + str(self.octave)
         if self.accidental is not None:
             s += self.accidental
