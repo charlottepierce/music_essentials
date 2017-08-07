@@ -1,8 +1,51 @@
 class Note(object):
+    """A single note, defined by a pitch, octave, and (optional) accidentals.
+
+    Attributes
+    ----------
+    VALID_PITCHES : tuple
+        List of valid pitch characters.
+    VALID_ACCIDENTALS : tuple
+        List of valid accidental representors.
+    """
+
     VALID_PITCHES = ('C', 'D', 'E', 'F', 'G', 'A', 'B')
     VALID_ACCIDENTALS = ('#', '##', 'b', 'bb')
 
     def __init__(self, pitch, octave, accidental=None):
+        """Create a new Note.
+
+        Parameters
+        ----------
+        pitch : str
+            The pitch of the note. Should be one of VALID_PITCHES, but can
+            be upper or lower case.
+        octave : int
+            The octave of the note. Should be in the range [-1, 9].
+        accidental : str, optional
+            The accidental to apply to the note. Should be one of VALID_ACCIDENTALS.
+
+        Returns
+        -------
+        Note
+            A new note with the given pitch, octave, and accidental.
+
+        Raises
+        ------
+        ValueError
+            If an invalid pitch, octave, or accidental is provided.
+        
+        Examples
+        --------
+        >>> n = Note('A', 4, '##')
+        >>> print(n)
+        A4##
+        >>> n = Note('d', 7)
+        >>> print(n)
+        D7
+        >>> n = Note('x', 6)
+        ValueError: Invalid pitch: x
+        """
         if not isinstance(pitch, str):
             raise ValueError('Expected string for pitch - (provided ' + str(pitch) + ')')
         if pitch.upper() not in Note.VALID_PITCHES:
@@ -32,6 +75,42 @@ class Note(object):
 
     @classmethod
     def from_note_string(cls, note_string):
+        """Create a new Note.
+
+        Parameters
+        ----------
+        note_string : str
+            A string representing the note to create. Should be in the form
+            <pitch><octave><accidental>
+            
+            The pitch of the note should be one of VALID_PITCHES, but can
+            be upper or lower case.
+
+            The octave of the note should be in the range [-1, 9].
+
+            The accidental is optional, but if used should be one of VALID_ACCIDENTALS.
+
+        Returns
+        -------
+        Note
+            A new note with the given pitch, octave, and accidental.
+
+        Raises
+        ------
+        ValueError
+            If an invalid pitch, octave, or accidental is provided.
+        
+        Examples
+        --------
+        >>> n = Note.from_note_string('A4##')
+        >>> print(n)
+        A4##
+        >>> n = Note('d7')
+        >>> print(n)
+        D7
+        >>> n = Note('x6')
+        ValueError: Invalid pitch: x
+        """
         pitch = note_string[0]
         octave = note_string[1]
         accidental = note_string[2:]
