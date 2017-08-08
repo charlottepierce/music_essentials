@@ -49,7 +49,7 @@ def test_interval_creation_correct_interval_augmented():
     assert i.interval_type == 'aug'
 
 def test_interval_creation_correct_size_two_digit():
-    i = Interval('aug15')
+    i = Interval.from_interval_string('aug15')
     assert i.size == 15
 
 def test_interval_creation_correct_size():
