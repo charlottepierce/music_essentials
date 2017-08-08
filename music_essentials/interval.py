@@ -1,5 +1,6 @@
 # TODO: add support for perfect intervals
 # TODO: allow only valid interval types (e.g., no such thing as a minor octave)
+# TODO: add shorthands for tone/semitone intervals
 
 class Interval(object):
     """Representation of an interval (i.e., gap) between notes."""

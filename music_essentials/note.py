@@ -1,6 +1,7 @@
 # TODO: method to get midi note number
 # TODO: validation: only accept note parameters which result in a valid MIDI note
 # TODO: method to get vextab representation
+# TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
