@@ -81,6 +81,10 @@ def test_manual_interval_creation_incorrect_size_string():
     with pytest.raises(ValueError):
         i = Interval('M', 'butts')
 
+def test_manual_interval_creation_incorrect_interval_combination():
+    with pytest.raises(ValueError):
+        i = Interval('P', 6)
+
 # Interval creation from string - incorrect values
 def test_interval_creation_incorrect_interval_type():
     with pytest.raises(ValueError):
@@ -97,3 +101,7 @@ def test_interval_creation_incorrect_size_float_value():
 def test_interval_creation_incorrect_size_string():
     with pytest.raises(ValueError):
         i = Interval.from_interval_string('Mbutts')
+
+def test_manual_interval_creation_incorrect_interval_combination():
+    with pytest.raises(ValueError):
+        i = Interval.from_interval_string('P6')
