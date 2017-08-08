@@ -15,7 +15,7 @@ class Note(object):
 
         Args:
             pitch : str
-                The pitch of the note. Should be one of:attr:`~music_essentials.note.Note.VALID_PITCHES`, but can
+                The pitch of the note. Should be one of :attr:`~music_essentials.note.Note.VALID_PITCHES`, but can
                 be upper or lower case.
             octave : int
                 The octave of the note. Should be in the range [-1, 9].
@@ -80,12 +80,12 @@ class Note(object):
                 A string representing the note to create. Should be in the form:
                     ``<pitch><octave><accidental>``
                 
-                The pitch of the note should be one of VALID_PITCHES, but can
+                The pitch of the note should be one of :attr:`~music_essentials.note.Note.VALID_PITCHES`, but can
                 be upper or lower case.
 
                 The octave of the note should be in the range ``[-1, 9]``.
 
-                The accidental is optional, but if used should be one of VALID_ACCIDENTALS.
+                The accidental is optional, but if used should be one of :attr:`~music_essentials.note.Note.VALID_ACCIDENTALS`.
 
         Returns:
             Note
