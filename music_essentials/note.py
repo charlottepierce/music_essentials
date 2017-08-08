@@ -1,3 +1,6 @@
+# TODO: method to get midi note number
+# TODO: method to get vextab representation
+
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
 
