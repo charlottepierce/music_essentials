@@ -63,3 +63,9 @@ def test_valid_addition_compound_diminished():
     i = Interval.from_interval_string('dim14')
     res = n + 1
     assert (res.pitch == 'B') and (res.octave == 5) and (res.accidental == 'bb')
+
+def test_valid_addition_compound_diminished_octave():
+    n = Note.from_note_string('C4')
+    i = Interval.from_interval_string('dim8')
+    res = n + 1
+    assert (res.pitch == 'C') and (res.octave == 5) and (res.accidental == 'b')

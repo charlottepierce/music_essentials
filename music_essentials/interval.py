@@ -8,6 +8,13 @@ class Interval(object):
     NAMED_INTERVAL_TYPES = ('M', 'm', 'P', 'dim', 'aug')
     """Explicit interval types supported - major, minor, diminished, augmented."""
 
+    VALID_INTERVAL_TYPES = ('P1', 'dim2', )
+    """List of valid intervals up to (but not including) a perfect octave.
+    
+    Inclues:
+    * P1: perfect unison
+    """
+
     def __init__(self, interval_type, size):
         """Create a new Interval.
 
