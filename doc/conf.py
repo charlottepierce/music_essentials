@@ -2,7 +2,6 @@ import sys
 import os
 
 sys.path.append(os.path.abspath('../../music_essentials/'))
-sys.path.insert(0, os.path.abspath('../..'))
 
 # -*- coding: utf-8 -*-
 #

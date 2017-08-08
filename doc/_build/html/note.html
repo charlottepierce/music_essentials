@@ -1,0 +1,237 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The ‘Note’ class &#8212; music_essentials 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Index of music_essentials’s documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-note-class">
+<h1>The ‘Note’ class<a class="headerlink" href="#the-note-class" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="music_essentials.note.Note">
+<em class="property">class </em><code class="descclassname">music_essentials.note.</code><code class="descname">Note</code><span class="sig-paren">(</span><em>pitch</em>, <em>octave</em>, <em>accidental=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music_essentials.note.Note" title="Permalink to this definition">¶</a></dt>
+<dd><p>A single note, defined by a pitch, octave, and (optional) accidentals.</p>
+<dl class="attribute">
+<dt id="music_essentials.note.Note.VALID_PITCHES">
+<code class="descname">VALID_PITCHES</code><em class="property"> = ('C', 'D', 'E', 'F', 'G', 'A', 'B')</em><a class="headerlink" href="#music_essentials.note.Note.VALID_PITCHES" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of valid pitch characters.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music_essentials.note.Note.VALID_ACCIDENTALS">
+<code class="descname">VALID_ACCIDENTALS</code><em class="property"> = ('#', '##', 'b', 'bb')</em><a class="headerlink" href="#music_essentials.note.Note.VALID_ACCIDENTALS" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of valid accidental representors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music_essentials.note.Note.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>pitch</em>, <em>octave</em>, <em>accidental=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music_essentials.note.Note.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Note.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>pitch <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The pitch of the note. Should be one of <a class="reference internal" href="#music_essentials.note.Note.VALID_PITCHES" title="music_essentials.note.Note.VALID_PITCHES"><code class="xref py py-attr docutils literal"><span class="pre">VALID_PITCHES</span></code></a>, but can
+be upper or lower case.</dd>
+<dt>octave <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>The octave of the note. Should be in the range [-1, 9].</dd>
+</dl>
+</dd>
+<dt>Kwags:</dt>
+<dd><dl class="first last docutils">
+<dt>accidental <span class="classifier-delimiter">:</span> <span class="classifier">str (default None)</span></dt>
+<dd>The accidental to apply to the note. Should be one of <a class="reference internal" href="#music_essentials.note.Note.VALID_ACCIDENTALS" title="music_essentials.note.Note.VALID_ACCIDENTALS"><code class="xref py py-attr docutils literal"><span class="pre">VALID_ACCIDENTALS</span></code></a>.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>Note</dt>
+<dd>A new note with the given pitch, octave, and accidental.</dd>
+</dl>
+</dd>
+<dt>Raises:</dt>
+<dd><dl class="first last docutils">
+<dt>ValueError</dt>
+<dd>If an invalid pitch, octave, or accidental is provided.</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;##&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">A4##</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">D7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">ValueError: Invalid pitch: x</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="music_essentials.note.Note.from_note_string">
+<em class="property">classmethod </em><code class="descname">from_note_string</code><span class="sig-paren">(</span><em>note_string</em><span class="sig-paren">)</span><a class="headerlink" href="#music_essentials.note.Note.from_note_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Note.</p>
+<p>Processes the note string then uses the constructor <a class="reference internal" href="#music_essentials.note.Note.__init__" title="music_essentials.note.Note.__init__"><code class="xref py py-attr docutils literal"><span class="pre">__init__()</span></code></a></p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>note_string <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><dl class="first docutils">
+<dt>A string representing the note to create. Should be in the form:</dt>
+<dd><code class="docutils literal"><span class="pre">&lt;pitch&gt;&lt;octave&gt;&lt;accidental&gt;</span></code></dd>
+</dl>
+<p>The pitch of the note should be one of <a class="reference internal" href="#music_essentials.note.Note.VALID_PITCHES" title="music_essentials.note.Note.VALID_PITCHES"><code class="xref py py-attr docutils literal"><span class="pre">VALID_PITCHES</span></code></a>, but can
+be upper or lower case.</p>
+<p>The octave of the note should be in the range <code class="docutils literal"><span class="pre">[-1,</span> <span class="pre">9]</span></code>.</p>
+<p class="last">The accidental is optional, but if used should be one of <a class="reference internal" href="#music_essentials.note.Note.VALID_ACCIDENTALS" title="music_essentials.note.Note.VALID_ACCIDENTALS"><code class="xref py py-attr docutils literal"><span class="pre">VALID_ACCIDENTALS</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>Note</dt>
+<dd>A new note with the given pitch, octave, and accidental.</dd>
+</dl>
+</dd>
+<dt>Raises:</dt>
+<dd><dl class="first last docutils">
+<dt>ValueError</dt>
+<dd>If an invalid pitch, octave, or accidental is provided.</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="o">.</span><span class="n">from_note_string</span><span class="p">(</span><span class="s1">&#39;A4##&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">A4##</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;d7&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">D7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;x6&#39;</span><span class="p">)</span>
+<span class="go">ValueError: Invalid pitch: x</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="music_essentials.note.Note.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music_essentials.note.Note.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a string representation of the note in the form <code class="docutils literal"><span class="pre">&lt;pitch&gt;&lt;octave&gt;&lt;accidental&gt;</span></code>.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">B9#</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">G7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">D3b</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">music_essentials</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The ‘Note’ class</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Index of music_essentials’s documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Charlotte Pierce.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/note.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
