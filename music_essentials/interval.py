@@ -18,13 +18,13 @@ class Interval(object):
     
     Inclues:
 
-    * dim1/P1/aug1: diminished/perfect/augmented unison
-    * dim2/m2/M2/aug2: diminished/minor/major/augmented second
-    * dim3/m3/M3/aug3: diminished/minor/major/augmented third
-    * dim4/P4/aug4: diminished/perfect/augmented fourth
-    * dim5/P5/aug5: diminished/perfect/augmented fifth
-    * dim6/m6/M6/aug6: diminished/minor/major/augmented sixth
-    * dim7/m7/M7/aug7: diminished/minor/major/augmented seventh
+    * ``'dim1'``/``'P1'``/``'aug1'``: diminished/perfect/augmented unison
+    * ``'dim2'``/``'m2'``/``'M2'``/``'aug2'``: diminished/minor/major/augmented second
+    * ``'dim3'``/``'m3'``/``'M3'``/``'aug3'``: diminished/minor/major/augmented third
+    * ``'dim4'``/``'P4'``/``'aug4'``: diminished/perfect/augmented fourth
+    * ``'dim5'``/``'P5'``/``'aug5'``: diminished/perfect/augmented fifth
+    * ``'dim6'``/``'m6'``/``'M6'``/``'aug6'``: diminished/minor/major/augmented sixth
+    * ``'dim7'``/``'m7'``/``'M7'``/``'aug7'``: diminished/minor/major/augmented seventh
     """
 
     def __init__(self, interval_type, size):
