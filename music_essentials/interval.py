@@ -89,7 +89,14 @@ class Interval(object):
         return cls(interval_type, size)
 
     def __str__(self):
-        return self.interval_type + str(self.distance)
+        """Create a string representation of the interval in the form ``<interval type><size>``.
+        
+        Examples:
+            >>> i = Interval.from_interval_string('m7')
+            >>> print(i)
+            m7
+        """
+        return self.interval_type + str(self.size)
 
 
 if __name__ == '__main__':
