@@ -10,6 +10,7 @@ Index of music_essentials's documentation
     :maxdepth: 2
 
     note
+    interval
 
 
 Indices and tables
