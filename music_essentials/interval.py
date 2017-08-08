@@ -8,11 +8,39 @@ class Interval(object):
     NAMED_INTERVAL_TYPES = ('M', 'm', 'P', 'dim', 'aug')
     """Explicit interval types supported - major, minor, diminished, augmented."""
 
-    VALID_INTERVAL_TYPES = ('P1', 'dim2', )
+    VALID_INTERVAL_TYPES = ('P1', 'aug1', 'dim2', 'm2', 'aug2', 'M2', 'dim3',
+    'm3', 'M3', 'aug3', 'dim4', 'P4', 'aug4', 'dim5', 'P5', 'aug5', 'dim6',
+    'm6', 'M6', 'aug6', 'dim7', 'm7', 'M7', 'aug7')
     """List of valid intervals up to (but not including) a perfect octave.
+
+    Compound intervals are formed/processed internally by adding perfect 
+    octaves to these valid interval types.
     
     Inclues:
     * P1: perfect unison
+    * aug1: augmented unison
+    * dim2: diminished second
+    * m2: minor second
+    * aug2: augmented second
+    * M2: major second
+    * dim3: diminished third
+    * m3: minor third
+    * M3: major third
+    * aug3: augmented third
+    * dim4: diminished fourth
+    * P4: perfect fourth
+    * aug4: augmented fourth
+    * dim5: diminished fifth
+    * P5: perfect fifth
+    * aug5: august fifth
+    * dim6: diminished sixth
+    * m6: minor sixth
+    * M6: major sixth
+    * aug6: augmented sixth
+    * dim7: diminished seventh
+    * m7: minor seventh
+    * M7: major seventh
+    * aug7: augmented sevent
     """
 
     def __init__(self, interval_type, size):
