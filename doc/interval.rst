@@ -1,5 +1,5 @@
 The 'Interval' class
-----------------
+--------------------
 .. autoclass:: music_essentials.interval.Interval
     :member-order: bysource
     :members:
