@@ -4,7 +4,7 @@
 class Interval(object):
     """Representation of an interval (i.e., gap) between notes."""
 
-    NAMED_INTERVALS = ('M', 'm', 'dim', 'aug')
+    NAMED_INTERVALS = ('M', 'm', 'P', 'dim', 'aug')
     """Explicit interval types supported - major, minor, diminished, augmented."""
 
     def __init__(self, interval_type, size):

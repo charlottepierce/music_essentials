@@ -19,6 +19,10 @@ def test_manual_interval_creation_correct_interval_augmented():
     i = Interval('aug', 5)
     assert i.interval_type == 'aug'
 
+def test_manual_interval_creation_correct_interval_perfect():
+    i = Interval('P', 5)
+    assert i.interval_type == 'P'
+
 def test_manual_interval_creation_correct_size_whole_number():
     i = Interval('aug', 5)
     assert i.size == 5
