@@ -83,10 +83,14 @@ class Interval(object):
             >>> i = Interval.from_interval_string('m-1')
             ValueError: Expected interval distance to be positive (provided -1)
         """
-        size = interval_string[-1]
-        interval_type = interval_string[:-1]
+        for i in Interval.NAMED_INTERVALS:
+            if interval_string.startswith(i):
+                interval_type = i
+                size = interval_string.replace(i, '')
 
-        return cls(interval_type, size)
+                return cls(interval_type, size)
+
+        raise ValueError('Invalid interval string ' + str(interval_string))
 
     def __str__(self):
         """Create a string representation of the interval in the form ``<interval type><size>``.
