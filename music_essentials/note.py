@@ -123,6 +123,8 @@ class Note(object):
 
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
+
+        Can be used as a note string argument for :attr:`~music_essentials.note.Note.from_note_string()`.
         
         Examples:
             >>> n = Note('B', 9, '#')

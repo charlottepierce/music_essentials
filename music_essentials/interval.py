@@ -62,7 +62,7 @@ class Interval(object):
                 A string representing the interval to create. Should be in the form:
                     ``<interval type><size>``
                 
-                The interval type should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVAL_TYPES`.
+                The interval type should be one of :attr:`~music_essentials.interval.Interval.NAMED_INTERVAL_TYPES`.
 
                 The size of the interval should be positive.
 
@@ -96,7 +96,9 @@ class Interval(object):
         raise ValueError('Invalid interval string ' + str(interval_string))
 
     def __str__(self):
-        """Create a string representation of the interval in the form ``<interval type><size>``.
+        """Create a string representation of the interval in the form ``<interval type><size>``
+        
+        Can be used as an interval string argument for :attr:`~music_essentials.interval.Interval.from_interval_string()`.
         
         Examples:
             >>> i = Interval.from_interval_string('m7')
