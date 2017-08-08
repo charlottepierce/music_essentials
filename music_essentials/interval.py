@@ -4,7 +4,7 @@
 class Interval(object):
     """Representation of an interval (i.e., gap) between notes."""
 
-    NAMED_INTERVALS = ('M', 'm', 'P', 'dim', 'aug')
+    NAMED_INTERVAL_TYPES = ('M', 'm', 'P', 'dim', 'aug')
     """Explicit interval types supported - major, minor, diminished, augmented."""
 
     def __init__(self, interval_type, size):
@@ -12,7 +12,7 @@ class Interval(object):
 
         Args:
             interval_type : str
-                The type of interval. Should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVALS`.
+                The type of interval. Should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVAL_TYPES`.
             distance : int
                 The size of the interval. Should be positive.
 
@@ -36,7 +36,7 @@ class Interval(object):
             >>> i = Interval('m', -1)
             ValueError: Expected interval distance to be positive (provided -1)
         """
-        if interval_type not in Interval.NAMED_INTERVALS:
+        if interval_type not in Interval.NAMED_INTERVAL_TYPES:
             raise ValueError('Unsupported interval type specified: ' + str(interval_type))
 
         try:
@@ -62,7 +62,7 @@ class Interval(object):
                 A string representing the interval to create. Should be in the form:
                     ``<interval type><size>``
                 
-                The interval type should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVALS`.
+                The interval type should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVAL_TYPES`.
 
                 The size of the interval should be positive.
 
@@ -86,7 +86,7 @@ class Interval(object):
             >>> i = Interval.from_interval_string('m-1')
             ValueError: Expected interval distance to be positive (provided -1)
         """
-        for i in Interval.NAMED_INTERVALS:
+        for i in Interval.NAMED_INTERVAL_TYPES:
             if interval_string.startswith(i):
                 interval_type = i
                 size = interval_string.replace(i, '')
