@@ -15,7 +15,7 @@ class Interval(object):
 
         Returns:
             Interval
-                A new interval of the given type and size..
+                A new interval of the given type and size.
 
         Raises:
             ValueError
@@ -50,6 +50,39 @@ class Interval(object):
     
     @classmethod
     def from_interval_string(cls, interval_string):
+        """Create a new Interval.
+
+        Processes the interval string then uses the constructor :attr:`~music_essentials.interval.Interval.__init__()`
+
+        Args:
+            interval_string : str
+                A string representing the interval to create. Should be in the form:
+                    ``<interval type><size>``
+                
+                The interval type should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVALS`.
+
+                The size of the interval should be positive.
+
+        Returns:
+            Interval
+                A new interval of the given type and size.
+
+        Raises:
+            ValueError
+                If an invalid interval type or size is provided.
+        
+        Examples:
+            >>> i = Interval.from_interval_string('M4')
+            >>> print(i)
+            M4
+            >>> i = Interval.from_interval_string('dim13')
+            >>> print(i)
+            dim13
+            >>> i = Interval.from_interval_string('i6')
+            ValueError: Unsupported interval type specified: i
+            >>> i = Interval.from_interval_string('m-1')
+            ValueError: Expected interval distance to be positive (provided -1)
+        """
         size = interval_string[-1]
         interval_type = interval_string[:-1]
 
