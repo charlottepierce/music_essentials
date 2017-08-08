@@ -115,6 +115,12 @@ class Note(object):
 
         return cls(pitch, octave, accidental)
 
+    def __add__(self, other):
+        if not isinstance(other, Interval):
+            raise TypeError('unsupported operand type(s) for +: \'Note\' and \'' + str(other.__class__.__name__) + '\'')
+
+        raise NotImplementedError('Working on it!')
+
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
         
