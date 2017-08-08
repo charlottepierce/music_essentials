@@ -1,4 +1,5 @@
 # TODO: method to get midi note number
+# TODO: validation: only accept note parameters which result in a valid MIDI note
 # TODO: method to get vextab representation
 
 class Note(object):
