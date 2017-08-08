@@ -60,6 +60,10 @@ def test_interval_creation_correct_size():
     i = Interval.from_interval_string('aug5')
     assert i.size == 5
 
+def test_creation_all_valid_intervals_list():
+    for x in Interval.VALID_INTERVAL_TYPES:
+        i = Interval.from_interval_string(x)
+
 # Manual interval creation - incorrect values
 def test_manual_interval_creation_incorrect_interval_type():
     with pytest.raises(ValueError):
