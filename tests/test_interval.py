@@ -61,6 +61,10 @@ def test_manual_interval_creation_incorrect_interval_type():
     with pytest.raises(ValueError):
         i = Interval('asd', 5)
 
+def test_manual_interval_creation_incorrect_size_zero():
+    with pytest.raises(ValueError):
+        i = Interval('M', 0)
+
 def test_manual_interval_creation_incorrect_size_negative():
     with pytest.raises(ValueError):
         i = Interval('M', -5)

@@ -1,3 +1,6 @@
+# TODO: add support for perfect intervals
+# TODO: allow only valid interval types (e.g., no such thing as a minor octave)
+
 class Interval(object):
     """Representation of an interval (i.e., gap) between notes."""
 
@@ -42,7 +45,7 @@ class Interval(object):
             raise ValueError('Expected integer for interval distance (provided ' + str(size) + ')')
         if '.' in str(size): # check that the distance number doesn't have a decimal place
             raise ValueError('Expected integer for interval distance (provided ' + str(size) + ')')
-        if int(size) < 0:
+        if int(size) <= 0:
             raise ValueError('Expected interval distance to be positive (provided ' + str(size) + ')')
 
         self.interval_type = interval_type
