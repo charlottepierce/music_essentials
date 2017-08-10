@@ -52,9 +52,9 @@ class Interval(object):
             >>> i = Interval('i', 6)
             ValueError: Unsupported interval type specified: i
             >>> i = Interval('m', -1)
-            ValueError: Expected interval distance to be positive (provided -1)
+            ValueError: Expected interval distance to be positive, got -1
             >>> i = Interval('M', 5)
-            ValueError: Impossible interval specific (provided M5)
+            ValueError: Impossible interval specified: M5
         """
         if interval_type not in Interval.NAMED_INTERVAL_TYPES:
             raise ValueError('Unsupported interval type specified: ' + str(interval_type))
@@ -62,11 +62,11 @@ class Interval(object):
         try:
             int(size) # test if distance value is a number
         except:
-            raise ValueError('Expected integer for interval distance (provided ' + str(size) + ')')
+            raise ValueError('Expected integer for interval distance, got: ' + str(size))
         if '.' in str(size): # check that the distance number doesn't have a decimal place
-            raise ValueError('Expected integer for interval distance (provided ' + str(size) + ')')
+            raise ValueError('Expected integer for interval distance, got: ' + str(size))
         if int(size) <= 0:
-            raise ValueError('Expected interval distance to be positive (provided ' + str(size) + ')')
+            raise ValueError('Expected interval distance to be positive, got: ' + str(size))
 
         # convert interval to base (i.e., non-compound equivalent)
         interval_string = str(interval_type)
@@ -80,7 +80,7 @@ class Interval(object):
 
         # check if interval is possible (e.g., M4 is not a valid interval - it's P4)
         if interval_string not in Interval.VALID_INTERVAL_TYPES:
-            raise ValueError('Impossible interval specific (provided ' + str(interval_type) + str(size) + ')')
+            raise ValueError('Impossible interval type specified: ' + str(interval_type) + str(size))
 
         self.interval_type = interval_type
         self.size = int(size)
@@ -118,9 +118,9 @@ class Interval(object):
             >>> i = Interval.from_interval_string('i6')
             ValueError: Unsupported interval type specified: i
             >>> i = Interval.from_interval_string('m-1')
-            ValueError: Expected interval distance to be positive (provided -1)
+            ValueError: Expected interval distance to be positive, got -1
             >>> i = Interval.from_interval_string('M5')
-            ValueError: Impossible interval specific (provided M5)
+            ValueError: Impossible interval specified: M5
         """
         for i in Interval.NAMED_INTERVAL_TYPES:
             if interval_string.startswith(i):
@@ -129,7 +129,7 @@ class Interval(object):
 
                 return cls(interval_type, size)
 
-        raise ValueError('Invalid interval string ' + str(interval_string))
+        raise ValueError('Invalid interval string: ' + str(interval_string))
 
     def __str__(self):
         """Create a string representation of the interval in the form ``<interval type><size>``

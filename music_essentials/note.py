@@ -44,23 +44,19 @@ class Note(object):
             >>> n = Note('x', 6)
             ValueError: Invalid pitch: x
         """
-        if not isinstance(pitch, str):
-            raise ValueError('Expected string for pitch - (provided ' + str(pitch) + ')')
         if pitch.upper() not in Note.VALID_PITCHES:
             raise ValueError('Invalid pitch: ' + str(pitch))
 
         try:
             int(octave) # test if octave value is a number
         except:
-            raise ValueError('Expected integer for octave - (provided ' + str(octave) + ')')
+            raise ValueError('Expected integer for octave, got: ' + str(octave))
         if '.' in str(octave): # check that the number doesn't have a decimal place
-            raise ValueError('Expected integer for octave - (provided ' + str(octave) + ')')
+            raise ValueError('Expected integer for octave, got ' + str(octave))
         if (int(octave) < -1) or (int(octave) > 9):
-            raise ValueError('Octave needs to be in the range [-1, 9] - (provided ' + str(octave) + ')')
+            raise ValueError('Octave needs to be in the range [-1, 9], got: ' + str(octave))
 
         if accidental is not None:
-            if not isinstance(accidental, str):
-                raise ValueError('Expected string for accidental - provided ' + str(accidental) + ')')
             if accidental.lower() not in Note.VALID_ACCIDENTALS:
                 raise ValueError('Invalid accidental: ' + str(accidental))
 
@@ -101,10 +97,10 @@ class Note(object):
             >>> n = Note.from_note_string('A4##')
             >>> print(n)
             A4##
-            >>> n = Note('d7')
+            >>> n = Note.from_note_string('d7')
             >>> print(n)
             D7
-            >>> n = Note('x6')
+            >>> n = Note.from_note_string('x6')
             ValueError: Invalid pitch: x
         """
         pitch = note_string[0]
