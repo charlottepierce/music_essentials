@@ -68,6 +68,20 @@ class Interval(object):
         if int(size) <= 0:
             raise ValueError('Expected interval distance to be positive (provided ' + str(size) + ')')
 
+        # convert interval to base (i.e., non-compound equivalent)
+        interval_string = str(interval_type)
+        if int(size) >= 8:
+            base_size = int(size) - 7
+            while (base_size >= 8):
+                base_size -= 7
+            interval_string += str(base_size)
+        else:
+            interval_string += str(size)
+
+        # check if interval is possible (e.g., M4 is not a valid interval - it's P4)
+        if interval_string not in Interval.VALID_INTERVAL_TYPES:
+            raise ValueError('Impossible interval specific (provided ' + str(interval_type) + str(size) + ')')
+
         self.interval_type = interval_type
         self.size = int(size)
     
