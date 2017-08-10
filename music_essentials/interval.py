@@ -42,10 +42,10 @@ class Interval(object):
 
         Raises:
             ValueError
-                If an invalid interval type or size is provided.
+                If an invalid interval type, size, or combination of type and size is provided.
         
         Examples:
-            >>> i = Interval('M', 4)
+            >>> i = Interval('M', 3)
             >>> print(i)
             M4
             >>> i = Interval('dim', 13)
@@ -55,6 +55,8 @@ class Interval(object):
             ValueError: Unsupported interval type specified: i
             >>> i = Interval('m', -1)
             ValueError: Expected interval distance to be positive (provided -1)
+            >>> i = Interval('M', 5)
+            ValueError: Impossible interval specific (provided M5)
         """
         if interval_type not in Interval.NAMED_INTERVAL_TYPES:
             raise ValueError('Unsupported interval type specified: ' + str(interval_type))
@@ -106,10 +108,10 @@ class Interval(object):
 
         Raises:
             ValueError
-                If an invalid interval type or size is provided.
+                If an invalid interval type, size, or combination of type and size is provided.
         
         Examples:
-            >>> i = Interval.from_interval_string('M4')
+            >>> i = Interval.from_interval_string('M3')
             >>> print(i)
             M4
             >>> i = Interval.from_interval_string('dim13')
@@ -119,6 +121,8 @@ class Interval(object):
             ValueError: Unsupported interval type specified: i
             >>> i = Interval.from_interval_string('m-1')
             ValueError: Expected interval distance to be positive (provided -1)
+            >>> i = Interval.from_interval_string('M5')
+            ValueError: Impossible interval specific (provided M5)
         """
         for i in Interval.NAMED_INTERVAL_TYPES:
             if interval_string.startswith(i):
