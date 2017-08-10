@@ -4,11 +4,11 @@ from music_essentials import Interval
 
 # Manual interval creation - correct values
 def test_manual_interval_creation_correct_interval_major():
-    i = Interval('M', 5)
+    i = Interval('M', 6)
     assert i.interval_type == 'M'
 
 def test_manual_interval_creation_correct_interval_minor():
-    i = Interval('m', 5)
+    i = Interval('m', 6)
     assert i.interval_type == 'm'
 
 def test_manual_interval_creation_correct_interval_diminished():
@@ -37,11 +37,11 @@ def test_manual_interval_creation_correct_size_as_string():
 
 # Interval creation from string - correct values
 def test_interval_creation_correct_interval_major():
-    i = Interval.from_interval_string('M5')
+    i = Interval.from_interval_string('M6')
     assert i.interval_type == 'M'
 
 def test_interval_creation_correct_interval_minor():
-    i = Interval.from_interval_string('m5')
+    i = Interval.from_interval_string('m6')
     assert i.interval_type == 'm'
 
 def test_interval_creation_correct_interval_diminished():
@@ -79,7 +79,7 @@ def test_manual_interval_creation_incorrect_size_negative():
 
 def test_manual_interval_creation_incorrect_size_float_value():
     with pytest.raises(ValueError):
-        i = Interval('M', 5.5)
+        i = Interval('M', 6.5)
 
 def test_manual_interval_creation_incorrect_size_string():
     with pytest.raises(ValueError):
@@ -100,7 +100,7 @@ def test_interval_creation_incorrect_size_negative():
 
 def test_interval_creation_incorrect_size_float_value():
     with pytest.raises(ValueError):
-        i = Interval.from_interval_string('M5.5')
+        i = Interval.from_interval_string('M6.5')
 
 def test_interval_creation_incorrect_size_string():
     with pytest.raises(ValueError):
