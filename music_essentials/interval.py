@@ -30,7 +30,7 @@ class Interval(object):
 
         Args:
             interval_type : str
-                The type of interval. Should be one of:attr:`~music_essentials.interval.Interval.NAMED_INTERVAL_TYPES`.
+                The type of interval. Should be one of :attr:`~music_essentials.interval.Interval.NAMED_INTERVAL_TYPES`.
             distance : int
                 The size of the interval. Should be positive.
 
