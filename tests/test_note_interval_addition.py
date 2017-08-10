@@ -11,7 +11,7 @@ def test_valid_addition_simple_major_second():
 
 def test_valid_addition_simple_major_fifth():
     n = Note.from_note_string('C4')
-    i = Interval.from_interval_string('M5')
+    i = Interval.from_interval_string('P5')
     res = n + 1
     assert (res.pitch == 'G') and (res.octave == 4) and (res.accidental == None)
 
@@ -29,13 +29,13 @@ def test_valid_addition_simple_minor_seventh():
 
 def test_valid_addition_simple_unison():
     n = Note.from_note_string('C4')
-    i = Interval.from_interval_string('M1')
+    i = Interval.from_interval_string('P1')
     res = n + 1
     assert (res.pitch == 'C') and (res.octave == 4) and (res.accidental == None)
 
 def test_valid_addition_simple_octave():
     n = Note.from_note_string('C4')
-    i = Interval.from_interval_string('M8')
+    i = Interval.from_interval_string('P8')
     res = n + 1
     assert (res.pitch == 'C') and (res.octave == 5) and (res.accidental == None)
 
