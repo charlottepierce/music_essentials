@@ -44,6 +44,8 @@ class Note(object):
             >>> n = Note('x', 6)
             ValueError: Invalid pitch: x
         """
+        if not isinstance(pitch, str):
+            raise ValueError('Expected string for pitch, got: ' + str(pitch))
         if pitch.upper() not in Note.VALID_PITCHES:
             raise ValueError('Invalid pitch: ' + str(pitch))
 
