@@ -3,6 +3,8 @@
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
+from .interval import Interval
+
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
 
