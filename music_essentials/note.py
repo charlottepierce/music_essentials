@@ -158,8 +158,6 @@ class Note(object):
             pitch_diff = -7 + pitch_diff
         new_pitch = Note.VALID_PITCHES[note_pitch_idx + pitch_diff]
 
-        print(new_pitch)
-
         # calculate new octave
         base_size = int(other.size)
         octave_diff = 0
@@ -171,8 +169,6 @@ class Note(object):
         if Note.VALID_PITCHES.index(new_pitch) < Note.VALID_PITCHES.index(self.pitch):
             octave_diff += 1
         new_octave = self.octave + octave_diff
-
-        print(new_octave)
 
         # find appropriate accidental
         goal_semitone_diff = octave_diff * 12
@@ -192,8 +188,6 @@ class Note(object):
                 goal_semitone_diff -= 1
             elif other.interval_type == 'aug':
                 goal_semitone_diff += 1
-
-        print(goal_semitone_diff)
 
         for a in Note.VALID_ACCIDENTALS:
             new_note = Note(new_pitch, new_octave, a)
