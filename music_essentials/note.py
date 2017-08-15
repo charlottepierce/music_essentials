@@ -1,7 +1,7 @@
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
-from .interval import Interval
+from interval import Interval
 
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
@@ -126,8 +126,6 @@ class Note(object):
         # TODO: docstring
         if not isinstance(other, Interval):
             raise TypeError('unsupported operand type(s) for +: \'Note\' and \'' + str(other.__class__.__name__) + '\'')
-
-        print('Adding ' + str(self) + ' and ' + str(other))
         
         # calculate new pitch
         note_pitch_idx = Note.VALID_PITCHES.index(self.pitch)
@@ -135,19 +133,9 @@ class Note(object):
         if (note_pitch_idx + pitch_diff) > (len(Note.VALID_PITCHES) - 1):
             pitch_diff = -7 + pitch_diff
         new_pitch = Note.VALID_PITCHES[note_pitch_idx + pitch_diff]
-        
-        # calculate new octave
-        octave_diff = 0
-        if other.size > 7:
-            octave_diff = (other.size / 8)
-        elif Note.VALID_PITCHES.index(new_pitch) < note_pitch_idx:
-            octave_diff += 1
-        new_octave = int(self.octave + octave_diff)
 
-        # TODO: finish this
-        # calculate new accidentals (if any)
-        new_accidentals = self.accidental # notes from perfect intervals have the same accidentals
-
+        print(new_pitch)
+            
     def midi_note_number(self):
         # TODO: docstring
         """Assumes middle C is MIDI note number 60.
@@ -191,7 +179,7 @@ class Note(object):
 
 
 if __name__ == '__main__':
-    n = Note.from_note_string('C4')
-    i = Interval.from_interval_string('P12')
+    n = Note.from_note_string('A4')
+    i = Interval.from_interval_string('P8')
 
     print('Result: ' + str(n + i))
