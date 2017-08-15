@@ -150,11 +150,17 @@ class Note(object):
 
     def midi_note_number(self):
         """Assumes middle C is MIDI note number 60."""
+        # calculate number based on octave and pitch
         midi_num = self.octave * 12
         midi_num += Note.VALID_PITCHES.index(self.pitch) * 2
         if self.pitch not in ('C', 'D', 'E'):
             midi_num -= 1
         midi_num += 12
+
+        # adjust for accidentals
+        if self.accidental is not None:
+            midi_num -= self.accidental.count('b')
+            midi_num += self.accidental.count('#')
 
         return midi_num
 
