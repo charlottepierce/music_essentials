@@ -3,7 +3,7 @@
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
-from interval import Interval
+from .interval import Interval
 
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
@@ -141,10 +141,12 @@ class Note(object):
         new_accidentals = self.accidental # notes from perfect intervals have the same accidentals
 
     def midi_note_number(self):
+        """Assumes middle C is MIDI note number 60."""
         midi_num = self.octave * 12
         midi_num += Note.VALID_PITCHES.index(self.pitch) * 2
         if self.pitch not in ('C', 'D', 'E'):
             midi_num -= 1
+        midi_num += 12
 
         return midi_num
 
