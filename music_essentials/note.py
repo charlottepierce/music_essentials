@@ -137,6 +137,17 @@ class Note(object):
             octave_diff += 1
         new_octave = int(self.octave + octave_diff)
 
+        # calculate new accidentals (if any)
+        new_accidentals = self.accidental # notes from perfect intervals have the same accidentals
+
+    def midi_note_number(self):
+        midi_num = self.octave * 12
+        midi_num += Note.VALID_PITCHES.index(self.pitch) * 2
+        if self.pitch not in ('C', 'D', 'E'):
+            midi_num -= 1
+
+        return midi_num
+
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
 
