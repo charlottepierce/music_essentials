@@ -1,5 +1,3 @@
-# TODO: test if method to convert Note to a MIDI note number works
-
 import pytest
 
 from music_essentials import Note
@@ -88,3 +86,108 @@ def test_midi_11():
     n = Note.from_note_string('B-1')
     mid = n.midi_note_number()
     assert mid == 11
+
+def test_midi_12():
+    n = Note.from_note_string('C0')
+    mid = n.midi_note_number()
+    assert mid == 12
+
+def test_midi_13_sharp():
+    n = Note.from_note_string('C0#')
+    mid = n.midi_note_number()
+    assert mid == 13
+
+def test_midi_13_flat():
+    n = Note.from_note_string('D0b')
+    mid = n.midi_note_number()
+    assert mid == 13
+
+def test_midi_14():
+    n = Note.from_note_string('D0')
+    mid = n.midi_note_number()
+    assert mid == 14
+
+def test_midi_15_sharp():
+    n = Note.from_note_string('D0#')
+    mid = n.midi_note_number()
+    assert mid == 15
+
+def test_midi_15_flat():
+    n = Note.from_note_string('E0b')
+    mid = n.midi_note_number()
+    assert mid == 15
+
+def test_midi_16():
+    n = Note.from_note_string('E0')
+    mid = n.midi_note_number()
+    assert mid == 16
+
+def test_midi_17():
+    n = Note.from_note_string('F0')
+    mid = n.midi_note_number()
+    assert mid == 17
+
+def test_midi_18_sharp():
+    n = Note.from_note_string('F0#')
+    mid = n.midi_note_number()
+    assert mid == 18
+
+def test_midi_18_flat():
+    n = Note.from_note_string('G0b')
+    mid = n.midi_note_number()
+    assert mid == 18
+
+def test_midi_19():
+    n = Note.from_note_string('G0')
+    mid = n.midi_note_number()
+    assert mid == 19
+
+def test_midi_20_sharp():
+    n = Note.from_note_string('G0#')
+    mid = n.midi_note_number()
+    assert mid == 20
+
+def test_midi_20_flat():
+    n = Note.from_note_string('A0b')
+    mid = n.midi_note_number()
+    assert mid == 20
+
+def test_midi_21():
+    n = Note.from_note_string('A0')
+    mid = n.midi_note_number()
+    assert mid == 21
+
+def test_midi_22_sharp():
+    n = Note.from_note_string('A0#')
+    mid = n.midi_note_number()
+    assert mid == 22
+
+def test_midi_22_flat():
+    n = Note.from_note_string('B0b')
+    mid = n.midi_note_number()
+    assert mid == 22
+
+def test_midi_23():
+    n = Note.from_note_string('B0')
+    mid = n.midi_note_number()
+    assert mid == 23
+
+def test_midi_120():
+    n = Note.from_note_string('C9')
+    mid = n.midi_note_number()
+    assert mid == 120
+
+def test_midi_127():
+    n = Note.from_note_string('G9')
+    mid = n.midi_note_number()
+    assert mid == 127
+
+def test_midi_127_flat():
+    n = Note.from_note_string('A9bb')
+    mid = n.midi_note_number()
+    assert mid == 127
+
+def test_midi_127_double_sharp():
+    n = Note.from_note_string('F9##')
+    mid = n.midi_note_number()
+    assert mid == 127
