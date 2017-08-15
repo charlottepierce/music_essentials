@@ -122,11 +122,20 @@ class Note(object):
 
         print('Adding ' + str(self) + ' and ' + str(other))
         
+        # calculate new pitch
         note_pitch_idx = Note.VALID_PITCHES.index(self.pitch)
         pitch_diff = (other.size % 7) - 1
         if (note_pitch_idx + pitch_diff) > (len(Note.VALID_PITCHES) - 1):
             pitch_diff = -7 + pitch_diff
         new_pitch = Note.VALID_PITCHES[note_pitch_idx + pitch_diff]
+        
+        # calculate new octave
+        octave_diff = 0
+        if other.size > 7:
+            octave_diff = (other.size / 8)
+        elif Note.VALID_PITCHES.index(new_pitch) < note_pitch_idx:
+            octave_diff += 1
+        new_octave = int(self.octave + octave_diff)
 
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
@@ -152,7 +161,7 @@ class Note(object):
 
 
 if __name__ == '__main__':
-    n = Note.from_note_string('F4')
-    i = Interval.from_interval_string('M7')
+    n = Note.from_note_string('C4')
+    i = Interval.from_interval_string('P12')
 
     print('Result: ' + str(n + i))
