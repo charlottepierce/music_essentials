@@ -134,7 +134,18 @@ class Note(object):
             pitch_diff = -7 + pitch_diff
         new_pitch = Note.VALID_PITCHES[note_pitch_idx + pitch_diff]
 
+        # calculate new octave
+        base_size = int(other.size)
+        octave_diff = 0
+        while (base_size >= 8):
+            base_size -= 7
+            octave_diff += 1
+        if Note.VALID_PITCHES.index(new_pitch) < Note.VALID_PITCHES.index(self.pitch):
+            octave_diff += 1
+        new_octave = self.octave + octave_diff
+
         print(new_pitch)
+        print(new_octave)
             
     def midi_note_number(self):
         # TODO: docstring
@@ -179,7 +190,7 @@ class Note(object):
 
 
 if __name__ == '__main__':
-    n = Note.from_note_string('A4')
-    i = Interval.from_interval_string('P8')
+    n = Note.from_note_string('C4')
+    i = Interval.from_interval_string('P12')
 
     print('Result: ' + str(n + i))
