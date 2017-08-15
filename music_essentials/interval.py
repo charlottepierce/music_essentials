@@ -1,5 +1,3 @@
-# TODO: add shorthands for tone/semitone intervals
-
 class Interval(object):
     """Representation of an interval (i.e., gap) between notes."""
 
