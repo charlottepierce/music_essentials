@@ -1,7 +1,7 @@
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
-from interval import Interval
+from .interval import Interval
 
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
@@ -9,7 +9,7 @@ class Note(object):
     VALID_PITCHES = ('C', 'D', 'E', 'F', 'G', 'A', 'B')
     """List of valid pitch characters."""
 
-    VALID_ACCIDENTALS = ('#', '##', 'b', 'bb')
+    VALID_ACCIDENTALS = ('#', '##', 'b', 'bb', None)
     """List of valid accidental representors."""
 
     def __init__(self, pitch, octave, accidental=None):
@@ -144,9 +144,32 @@ class Note(object):
             octave_diff += 1
         new_octave = self.octave + octave_diff
 
-        print(new_pitch)
-        print(new_octave)
-            
+        # find appropriate accidental
+        goal_semitone_diff = octave_diff * 12
+        if base_size in Interval._PERFECT_INTERVALS_SEMITONES.keys():
+            goal_semitone_diff += Interval._PERFECT_INTERVALS_SEMITONES[base_size]            
+            if other.interval_type == 'dim':
+                goal_semitone_diff -= 1
+            elif other.interval_type == 'aug':
+                goal_semitone_diff += 1
+        elif base_size in Interval._MAJOR_INTERVALS_SEMITONES.keys():
+            goal_semitone_diff += Interval._MAJOR_INTERVALS_SEMITONES[base_size]
+            if other.interval_type == 'dim':
+                goal_semitone_diff -= 2
+            elif other.interval_type == 'm':
+                goal_semitone_diff -= 1
+            elif other.interval_type == 'aug':
+                goal_semitone_diff += 1
+
+        for a in Note.VALID_ACCIDENTALS:
+            new_note = Note(new_pitch, new_octave, a)
+            diff = new_note.midi_note_number() - self.midi_note_number()
+
+            if diff == goal_semitone_diff:
+                return new_note
+
+        raise RuntimeError('FATAL ERROR: Could not complete note + interval operation: ' + str(self) + ' + ' + str(other))
+
     def midi_note_number(self):
         # TODO: docstring
         """Assumes middle C is MIDI note number 60.
@@ -191,6 +214,6 @@ class Note(object):
 
 if __name__ == '__main__':
     n = Note.from_note_string('C4')
-    i = Interval.from_interval_string('P12')
+    i = Interval.from_interval_string('M9')
 
     print('Result: ' + str(n + i))
