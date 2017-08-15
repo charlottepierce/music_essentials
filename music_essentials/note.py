@@ -123,7 +123,30 @@ class Note(object):
         return cls(pitch, octave, accidental)
 
     def __add__(self, other):
-        # TODO: docstring
+        """Calculate and return the note found when adding an interval to this note.
+
+        Args:
+            other : :attr:`~music_essentials.interval.Interval`
+                The interval to add to this note.
+
+        Returns:
+            Note
+                The new note that comes from adding the provided interval to this note.
+
+        Examples:
+            >>> n = Note.from_note_string('C4')
+            >>> i = Interval.from_interval_string('M2')
+            >>> print(n + i)
+            D4
+            >>> n = Note.from_note_string('C4')
+            >>> i = Interval.from_interval_string('m14')
+            >>> print(n + i)
+            B5b
+            >>> n = Note.from_note_string('C4')
+            >>> i = Interval.from_interval_string('aug13')
+            >>> print(n + i)
+            A5#
+        """
         if not isinstance(other, Interval):
             raise TypeError('unsupported operand type(s) for +: \'Note\' and \'' + str(other.__class__.__name__) + '\'')
         
@@ -171,9 +194,25 @@ class Note(object):
         raise RuntimeError('FATAL ERROR: Could not complete note + interval operation: ' + str(self) + ' + ' + str(other))
 
     def midi_note_number(self):
-        # TODO: docstring
-        """Assumes middle C is MIDI note number 60.
-        https://en.wikipedia.org/wiki/Scientific_pitch_notation
+        """Get the MIDI note number equivalent to this pitch.
+
+        Assumes that middle C corresponds to the MIDI note number 60, as 
+        described on `Wikipedia: <https://en.wikipedia.org/wiki/Scientific_pitch_notation#Table_of_note_frequencies>`_.
+
+        Returns:
+            int
+                The MIDI note number representing this pitch.
+        
+        Examples:
+            >>> n = Note.from_note_string('C-1')
+            >>> print(n.midi_note_number())
+            0
+            >>> n = Note.from_note_string('G9')
+            >>> print(n.midi_note_number())
+            127
+            >>> n = Note.from_note_string('B0b')
+            >>> print(n.midi_note_number())
+            22
         """
         # calculate number based on octave and pitch
         midi_num = self.octave * 12

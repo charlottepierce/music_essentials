@@ -25,6 +25,7 @@ class Interval(object):
     * ``'dim7'``/``'m7'``/``'M7'``/``'aug7'``: diminished/minor/major/augmented seventh
     """
 
+    # keys = interval size; values = number of semitones
     _PERFECT_INTERVALS_SEMITONES = {1:0, 4:5, 5:7}
     _MAJOR_INTERVALS_SEMITONES = {2:2, 3:4, 6:9, 7:11}
 
