@@ -111,6 +111,11 @@ class Note(object):
         octave = note_string[1]
         accidental = note_string[2:]
 
+        if octave == '-':
+            # interval is negative - offset octave and accidental variables
+            octave = note_string[1:3]
+            accidental = note_string[3:]
+
         if len(accidental) == 0:
             accidental = None
 
