@@ -23,6 +23,10 @@ def test_manual_note_creation_no_accidentals():
     n = Note('A', 4)
     assert n.accidental is None
 
+def test_manual_note_creation_neg_octave():
+    n = Note('C', -1)
+    assert n.octave == -1
+
 # Note creation from note string - correct values
 def test_note_creation_correct_pitch_uppercase():
     n = Note.from_note_string('A4bb')
@@ -40,9 +44,13 @@ def test_note_creation_correct_accidentals():
     n = Note.from_note_string('A4#')
     assert n.accidental == '#'
 
-def test_manual_note_creation_no_accidentals():
+def test_note_creation_no_accidentals():
     n = Note.from_note_string('A4')
     assert n.accidental is None
+
+def test_note_creation_neg_octave():
+    n = Note.from_note_string('C-1')
+    assert n.octave == -1
 
 # Manual note creation - invalid values
 def test_manual_note_creation_incorrect_pitch_uppercase():
