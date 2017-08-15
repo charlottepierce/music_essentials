@@ -150,7 +150,9 @@ class Note(object):
 
     def midi_note_number(self):
         # TODO: docstring
-        """Assumes middle C is MIDI note number 60."""
+        """Assumes middle C is MIDI note number 60.
+        https://en.wikipedia.org/wiki/Scientific_pitch_notation
+        """
         # calculate number based on octave and pitch
         midi_num = self.octave * 12
         midi_num += Note.VALID_PITCHES.index(self.pitch) * 2
