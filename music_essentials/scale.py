@@ -1,8 +1,8 @@
-from .interval import Interval, TONE, SEMITONE, TONE_AND_HALF
+from .interval import Interval, _TONE, _SEMITONE, _TONE_AND_HALF
 
 class Scale(object):
-    MAJOR = (TONE, TONE, SEMITONE, TONE, TONE, TONE, SEMITONE)
-    MINOR = (TONE, SEMITONE, TONE, TONE, SEMITONE, TONE_AND_HALF, SEMITONE)
+    MAJOR = (_TONE, _TONE, _SEMITONE, _TONE, _TONE, _TONE, _SEMITONE)
+    MINOR = (_TONE, _SEMITONE, _TONE, _TONE, _SEMITONE, _TONE_AND_HALF, _SEMITONE)
 
     @classmethod
     def build_scale(cls, tonic, scale_type):

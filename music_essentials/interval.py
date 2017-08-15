@@ -146,9 +146,9 @@ class Interval(object):
         return self.interval_type + str(self.size)
 
 
-TONE = Interval.from_interval_string('M2')
-SEMITONE = Interval.from_interval_string('m2')
-TONE_AND_HALF = Interval.from_interval_string('aug2')
+_TONE = Interval.from_interval_string('M2')
+_SEMITONE = Interval.from_interval_string('m2')
+_TONE_AND_HALF = Interval.from_interval_string('aug2')
 
 if __name__ == '__main__':
     i = Interval('m', 3)
