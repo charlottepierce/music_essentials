@@ -1,5 +1,3 @@
-# TODO: method to get midi note number
-# TODO: validation: only accept note parameters which result in a valid MIDI note
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
@@ -125,6 +123,7 @@ class Note(object):
         return cls(pitch, octave, accidental)
 
     def __add__(self, other):
+        # TODO: docstring
         if not isinstance(other, Interval):
             raise TypeError('unsupported operand type(s) for +: \'Note\' and \'' + str(other.__class__.__name__) + '\'')
 
@@ -145,10 +144,12 @@ class Note(object):
             octave_diff += 1
         new_octave = int(self.octave + octave_diff)
 
+        # TODO: finish this
         # calculate new accidentals (if any)
         new_accidentals = self.accidental # notes from perfect intervals have the same accidentals
 
     def midi_note_number(self):
+        # TODO: docstring
         """Assumes middle C is MIDI note number 60."""
         # calculate number based on octave and pitch
         midi_num = self.octave * 12
