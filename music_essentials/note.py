@@ -71,6 +71,9 @@ class Note(object):
         if accidental is not None:
             self.accidental = self.accidental.lower()
 
+        if (self.midi_note_number() < 0) or (self.midi_note_number() > 127):
+            raise ValueError('Invalid Note parameters, results in MIDI note number: ' + str(self.midi_note_number()))
+
     @classmethod
     def from_note_string(cls, note_string):
         """Create a new Note.
