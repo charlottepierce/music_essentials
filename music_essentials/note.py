@@ -3,7 +3,7 @@
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 
-from .interval import Interval
+from interval import Interval
 
 class Note(object):
     """A single note, defined by a pitch, octave, and (optional) accidentals."""
@@ -120,7 +120,13 @@ class Note(object):
         if not isinstance(other, Interval):
             raise TypeError('unsupported operand type(s) for +: \'Note\' and \'' + str(other.__class__.__name__) + '\'')
 
-        raise NotImplementedError('Working on it!')
+        print('Adding ' + str(self) + ' and ' + str(other))
+        
+        note_pitch_idx = Note.VALID_PITCHES.index(self.pitch)
+        pitch_diff = (other.size % 7) - 1
+        if (note_pitch_idx + pitch_diff) > (len(Note.VALID_PITCHES) - 1):
+            pitch_diff = -7 + pitch_diff
+        new_pitch = Note.VALID_PITCHES[note_pitch_idx + pitch_diff]
 
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
@@ -146,8 +152,7 @@ class Note(object):
 
 
 if __name__ == '__main__':
-    n = Note('A', 4, accidental='b')
-    print(n)
+    n = Note.from_note_string('F4')
+    i = Interval.from_interval_string('M7')
 
-    n = Note.from_note_string('A4#')
-    print(n)
+    print('Result: ' + str(n + i))
