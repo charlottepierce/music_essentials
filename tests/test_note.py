@@ -89,6 +89,14 @@ def test_manual_note_creation_incorrect_accidentals_wrong_symbols():
     with pytest.raises(ValueError):
         n = Note('A', 4, '*')
 
+def test_manual_note_creation_midi_num_low():
+    with pytest.raises(ValueError):
+        n = Note('C', -1, 'b')
+
+def test_manual_note_creation_midi_num_high():
+    with pytest.raises(ValueError):
+        n = Note('A', 9, 'b')
+
 # Note creation from note string - invalid values
 def test_note_creation_incorrect_pitch_uppercase():
     with pytest.raises(ValueError):
@@ -129,3 +137,11 @@ def test_note_creation_no_pitch():
 def test_note_creation_no_octave():
     with pytest.raises(ValueError):
         n = Note.from_note_string('C#')
+
+def test_note_creation_midi_num_low():
+    with pytest.raises(ValueError):
+        n = Note.from_note_string('C-1b')
+
+def test_note_creation_midi_num_high():
+    with pytest.raises(ValueError):
+        n = Note.from_note_string('A9b')
