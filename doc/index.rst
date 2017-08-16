@@ -11,6 +11,7 @@ Index of music_essentials's documentation
 
     note
     interval
+    scale
 
 
 Indices and tables
