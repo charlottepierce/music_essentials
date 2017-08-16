@@ -235,7 +235,27 @@ class Note(object):
         raise RuntimeError('FATAL ERROR: Could not complete note + interval operation: ' + str(self) + ' + ' + str(other))
 
     def __eq__(self, other):
-        # TODO: docstring
+        """Check if this note is equal to another note.
+
+        Does not consider `enharmonic notes <https://en.wikipedia.org/wiki/Enharmonic>`_ to be equal.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this note to.
+
+        Returns:
+            True if the notes have the same pitch, octave, and accidentals; otherwise false.
+
+        Examples:
+            >>> n1 = Note.from_note_string('C4')
+            >>> n2 = Note('C', 4)
+            >>> n1 == n2
+            True
+            >>> n1 = Note.from_note_string('C4#')
+            >>> n2 = Note.from_note_string('D4b')
+            >>> n1 == n2
+            False        
+        """
         # TODO: tests
         return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
 
