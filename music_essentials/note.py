@@ -34,7 +34,7 @@ class Note(object):
         Raises:
             ValueError
                 If an invalid pitch, octave, or accidental is provided.
-        
+
         Examples:
             >>> n = Note('A', 4, '##')
             >>> print(n)
@@ -83,7 +83,7 @@ class Note(object):
             note_string : str
                 A string representing the note to create. Should be in the form:
                     ``<pitch><octave><accidental>``
-                
+
                 The pitch of the note should be one of :attr:`~music_essentials.note.Note.VALID_PITCHES`, but can
                 be upper or lower case.
 
@@ -98,7 +98,7 @@ class Note(object):
         Raises:
             ValueError
                 If an invalid pitch, octave, or accidental is provided.
-        
+
         Examples:
             >>> n = Note.from_note_string('A4##')
             >>> print(n)
@@ -122,6 +122,41 @@ class Note(object):
             accidental = None
 
         return cls(pitch, octave, accidental)
+
+    def midi_note_number(self):
+        """Get the MIDI note number equivalent to this pitch.
+
+        Assumes that middle C corresponds to the MIDI note number 60, as
+        described on `Wikipedia: <https://en.wikipedia.org/wiki/Scientific_pitch_notation#Table_of_note_frequencies>`_.
+
+        Returns:
+            int
+                The MIDI note number representing this pitch.
+
+        Examples:
+            >>> n = Note.from_note_string('C-1')
+            >>> print(n.midi_note_number())
+            0
+            >>> n = Note.from_note_string('G9')
+            >>> print(n.midi_note_number())
+            127
+            >>> n = Note.from_note_string('B0b')
+            >>> print(n.midi_note_number())
+            22
+        """
+        # calculate number based on octave and pitch
+        midi_num = self.octave * 12
+        midi_num += Note.VALID_PITCHES.index(self.pitch) * 2
+        if self.pitch not in ('C', 'D', 'E'):
+            midi_num -= 1
+        midi_num += 12
+
+        # adjust for accidentals
+        if self.accidental is not None:
+            midi_num -= self.accidental.count('b')
+            midi_num += self.accidental.count('#')
+
+        return midi_num
 
     def __add__(self, other):
         """Calculate and return the note found when adding an interval to this note.
@@ -150,7 +185,7 @@ class Note(object):
         """
         if not isinstance(other, Interval):
             raise TypeError('unsupported operand type(s) for +: \'Note\' and \'' + str(other.__class__.__name__) + '\'')
-        
+
         # calculate new pitch
         note_pitch_idx = Note.VALID_PITCHES.index(self.pitch)
         pitch_diff = (other.size % 7) - 1
@@ -175,7 +210,7 @@ class Note(object):
         if not is_compound and octave_diff > 0:
             goal_semitone_diff -= 12
         if base_size in Interval._PERFECT_INTERVALS_SEMITONES.keys():
-            goal_semitone_diff += Interval._PERFECT_INTERVALS_SEMITONES[base_size]            
+            goal_semitone_diff += Interval._PERFECT_INTERVALS_SEMITONES[base_size]
             if other.interval_type == 'dim':
                 goal_semitone_diff -= 1
             elif other.interval_type == 'aug':
@@ -198,46 +233,16 @@ class Note(object):
 
         raise RuntimeError('FATAL ERROR: Could not complete note + interval operation: ' + str(self) + ' + ' + str(other))
 
-    def midi_note_number(self):
-        """Get the MIDI note number equivalent to this pitch.
-
-        Assumes that middle C corresponds to the MIDI note number 60, as 
-        described on `Wikipedia: <https://en.wikipedia.org/wiki/Scientific_pitch_notation#Table_of_note_frequencies>`_.
-
-        Returns:
-            int
-                The MIDI note number representing this pitch.
-        
-        Examples:
-            >>> n = Note.from_note_string('C-1')
-            >>> print(n.midi_note_number())
-            0
-            >>> n = Note.from_note_string('G9')
-            >>> print(n.midi_note_number())
-            127
-            >>> n = Note.from_note_string('B0b')
-            >>> print(n.midi_note_number())
-            22
-        """
-        # calculate number based on octave and pitch
-        midi_num = self.octave * 12
-        midi_num += Note.VALID_PITCHES.index(self.pitch) * 2
-        if self.pitch not in ('C', 'D', 'E'):
-            midi_num -= 1
-        midi_num += 12
-
-        # adjust for accidentals
-        if self.accidental is not None:
-            midi_num -= self.accidental.count('b')
-            midi_num += self.accidental.count('#')
-
-        return midi_num
+    def __eq__(self, other):
+        # TODO: docstring
+        # TODO: tests
+        return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
 
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
 
         Can be used as a note string argument for :attr:`~music_essentials.note.Note.from_note_string()`.
-        
+
         Examples:
             >>> n = Note('B', 9, '#')
             >>> print(n)
@@ -252,7 +257,7 @@ class Note(object):
         s = self.pitch + str(self.octave)
         if self.accidental is not None:
             s += self.accidental
-        
+
         return s
 
 
