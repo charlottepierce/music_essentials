@@ -2,6 +2,8 @@
 # TODO: method to get vextab representation
 # TODO: comparison between two notes: e.g., note1 < note2 = true/false
 # TODO: check if two notes are enharmonic
+# TODO: add support for triple sharps/flats
+# TODO: add support for quadruple sharps/flats
 
 from .interval import Interval
 
