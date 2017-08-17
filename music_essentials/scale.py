@@ -7,12 +7,15 @@ from .interval import Interval, _TONE, _SEMITONE, _TONE_AND_HALF
 class Scale(object):
     _MAJOR = (_TONE, _TONE, _SEMITONE, _TONE, _TONE, _TONE, _SEMITONE)
     _HARMONIC_MINOR = (_TONE, _SEMITONE, _TONE, _TONE, _SEMITONE, _TONE_AND_HALF, _SEMITONE)
+    _NATURAL_MINOR = (_TONE, _SEMITONE, _TONE, _TONE, _SEMITONE, _TONE, _TONE)
 
     _SCALE_PATTERNS = {
         'major': _MAJOR,
         'maj': _MAJOR,
         'minor': _HARMONIC_MINOR,
-        'min': _HARMONIC_MINOR
+        'min': _HARMONIC_MINOR,
+        'natural minor': _NATURAL_MINOR,
+        'nat min' : _NATURAL_MINOR
     }
 
     @classmethod
