@@ -1,6 +1,5 @@
 # TODO: specify number of octaves
 # TODO: specify direction
-# TODO: add natural minor
 
 from .interval import Interval, _TONE, _SEMITONE, _TONE_AND_HALF
 
