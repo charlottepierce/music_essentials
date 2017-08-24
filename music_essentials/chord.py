@@ -7,4 +7,19 @@ class Chord(object):
     
     def root(self):
         # TODO: doctring
+        # TODO: tests
         return self.notes[0]
+
+    def add_note(self, new_note):
+        # TODO: docstring
+        # TODO: tests
+        if new_note < self.root():
+            self.notes.insert(0, new_note)
+            return
+
+        for i in range(len(self.notes) - 1):
+            if (new_note >= self.notes[i]) and (new_note < self.notes[i + 1]):
+                self.notes.insert(i + 1, new_note)
+                return
+
+        self.notes.append(new_note)
