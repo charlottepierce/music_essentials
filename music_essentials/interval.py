@@ -37,11 +37,11 @@ class Interval(object):
                 The size of the interval. Should be positive.
 
         Returns:
-            Interval
+            :attr:`~music_essentials.interval.Interval`
                 A new interval of the given type and size.
 
         Raises:
-            ValueError
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid interval type, size, or combination of type and size is provided.
         
         Examples:
@@ -103,11 +103,11 @@ class Interval(object):
                 The size of the interval should be positive.
 
         Returns:
-            Interval
+            :attr:`~music_essentials.interval.Interval`
                 A new interval of the given type and size.
 
         Raises:
-            ValueError
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid interval type, size, or combination of type and size is provided.
         
         Examples:
@@ -149,11 +149,3 @@ class Interval(object):
 _TONE = Interval.from_interval_string('M2')
 _SEMITONE = Interval.from_interval_string('m2')
 _TONE_AND_HALF = Interval.from_interval_string('aug2')
-
-
-if __name__ == '__main__':
-    i = Interval('m', 3)
-    print(i)
-
-    i = Interval.from_interval_string('dim5')
-    print(i)
