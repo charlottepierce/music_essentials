@@ -245,25 +245,31 @@ class Note(object):
             bool
                 True if the two notes represent the same pitch, otherwise false.
 
+        Raises:
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
+                If anything other than a :attr:`~music_essentials.note.Note` is given to compare to.
+
         Examples:
-            >>> n1 + Note('C', 4)
-            >>> n2 + Note('D', 4)
+            >>> n1 = Note('C', 4)
+            >>> n2 = Note('D', 4)
             >>> n1.is_enharmonic(n2)
             False
-            >>> n1 + Note('C', 4, '#')
-            >>> n2 + Note('D', 4, 'b')
+            >>> n1 = Note('C', 4, '#')
+            >>> n2 = Note('D', 4, 'b')
             >>> n1.is_enharmonic(n2)
             True
-            >>> n1 + Note('F', 4)
-            >>> n2 + Note('E', 4, '#')
+            >>> n1 = Note('F', 4)
+            >>> n2 = Note('E', 4, '#')
             >>> n1.is_enharmonic(n2)
             True
-            >>> n1 + Note('F', 4)
-            >>> n2 + Note('G', 4, 'bb')
+            >>> n1 = Note('F', 4)
+            >>> n2 = Note('G', 4, 'bb')
             >>> n1.is_enharmonic(n2)
             True
         """
-        # TODO: tests
+        if not isinstance(other, Note):
+            raise ValueError('Expected comparator to be an instance of Note, got ' + str(other))
+
         return self.midi_note_number() == other.midi_note_number()
 
     def __eq__(self, other):

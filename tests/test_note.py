@@ -145,3 +145,39 @@ def test_note_creation_midi_num_low():
 def test_note_creation_midi_num_high():
     with pytest.raises(ValueError):
         n = Note.from_note_string('A9b')
+
+# Test detection of enharmonic notes
+def test_enharmonic_notes_wrong_parameter_type_int():
+    n1 = Note.from_note_string('C4')
+    with pytest.raises(ValueError):
+        n1.is_enharmonic(3)
+
+def test_enharmonic_notes_wrong_parameter_type_str():
+    n1 = Note.from_note_string('C4')
+    with pytest.raises(ValueError):
+        n1.is_enharmonic('hello')
+
+def test_enharmonic_notes_identical():
+    n1 = Note.from_note_string('G5##')
+    n2 = Note.from_note_string('G5##')
+    assert n1.is_enharmonic(n2) == True
+
+def test_enharmonic_notes_flat_to_sharp():
+    n1 = Note.from_note_string('G5#')
+    n2 = Note.from_note_string('A5b')
+    assert n1.is_enharmonic(n2) == True
+
+def test_enharmonic_notes_different_octaves():
+    n1 = Note.from_note_string('B5#')
+    n2 = Note.from_note_string('C6')
+    assert n1.is_enharmonic(n2) == True
+
+def test_enharmonic_notes_different_pitches():
+    n1 = Note.from_note_string('G5')
+    n2 = Note.from_note_string('A5bb')
+    assert n1.is_enharmonic(n2) == True
+
+def test_non_enharmonic_notes():
+    n1 = Note.from_note_string('G5')
+    n2 = Note.from_note_string('G5b')
+    assert n1.is_enharmonic(n2) == False
