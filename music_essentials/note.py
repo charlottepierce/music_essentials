@@ -236,6 +236,11 @@ class Note(object):
 
         raise RuntimeError('FATAL ERROR: Could not complete note + interval operation: ' + str(self) + ' + ' + str(other))
 
+    def is_enharmonic(self, other):
+        # TODO: docstring
+        # TODO: tests
+        return self.midi_note_number() == other.midi_note_number()
+
     def __eq__(self, other):
         """Check if this note is equal to another note.
 
@@ -261,6 +266,47 @@ class Note(object):
         # TODO: tests
         return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
 
+    def __ne__(self, other):
+        # TODO: docstring
+        # TODO: tests
+        return not self.__eq__(other)
+
+    def __lt__(self, other):
+        # TODO: docstring
+        # TODO: tests
+        if self.__eq__(other):
+            return false
+
+        if self.is_enharmonic(other):
+            if self.octave != other.octave:
+                return self.octave < other.octave
+            return Note.VALID_PITCHES.index(self.pitch) < Note.VALID_PITCHES.index(other.pitch)
+
+        return self.midi_note_number() < other.midi_note_number()
+
+    def __gt__(self, other):
+        # TODO: docstring
+        # TODO: tests
+        if self.__eq__(other):
+            return false
+
+        if self.is_enharmonic(other):
+            if self.octave != other.octave:
+                return self.octave > other.octave
+            return Note.VALID_PITCHES.index(self.pitch) > Note.VALID_PITCHES.index(other.pitch)
+
+        return self.midi_note_number() > other.midi_note_number()
+
+    def __le__(self, other):
+        # TODO: docstring
+        # TODO: tests
+        return not self.__gt__(other)
+
+    def __ge__(self, other):
+        # TODO: docstring
+        # TODO: tests
+        return not self.__lt__(other)
+
     def __str__(self):
         """Create a string representation of the note in the form ``<pitch><octave><accidental>``.
 
@@ -282,10 +328,3 @@ class Note(object):
             s += self.accidental
 
         return s
-
-
-if __name__ == '__main__':
-    n = Note.from_note_string('B4')
-    i = Interval.from_interval_string('m2')
-
-    print('Result: ' + str(n + i))
