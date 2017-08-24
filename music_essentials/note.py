@@ -235,7 +235,34 @@ class Note(object):
         raise RuntimeError('FATAL ERROR: Could not complete note + interval operation: ' + str(self) + ' + ' + str(other))
 
     def is_enharmonic(self, other):
-        # TODO: docstring
+        """Check if two notes are `enharmonic <https://en.wikipedia.org/wiki/Enharmonic>`_.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this to.
+        
+        Returns:
+            bool
+                True if the two notes represent the same pitch, otherwise false.
+
+        Examples:
+            >>> n1 + Note('C', 4)
+            >>> n2 + Note('D', 4)
+            >>> n1.is_enharmonic(n2)
+            False
+            >>> n1 + Note('C', 4, '#')
+            >>> n2 + Note('D', 4, 'b')
+            >>> n1.is_enharmonic(n2)
+            True
+            >>> n1 + Note('F', 4)
+            >>> n2 + Note('E', 4, '#')
+            >>> n1.is_enharmonic(n2)
+            True
+            >>> n1 + Note('F', 4)
+            >>> n2 + Note('G', 4, 'bb')
+            >>> n1.is_enharmonic(n2)
+            True
+        """
         # TODO: tests
         return self.midi_note_number() == other.midi_note_number()
 
@@ -249,7 +276,8 @@ class Note(object):
                 The note to compare this note to.
 
         Returns:
-            True if the notes have the same pitch, octave, and accidentals; otherwise false.
+            bool
+                True if the notes have the same pitch, octave, and accidentals; otherwise false.
 
         Examples:
             >>> n1 = Note.from_note_string('C4')
@@ -265,12 +293,56 @@ class Note(object):
         return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
 
     def __ne__(self, other):
-        # TODO: docstring
+        """Check if this note is note equal to another note.
+
+        Does not consider `enharmonic notes <https://en.wikipedia.org/wiki/Enharmonic>`_ to be equal.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this note to.
+
+        Returns:
+            bool
+                True if the notes do not have the same pitch, octave, and accidentals; otherwise false.
+
+        Examples:
+            >>> n1 = Note.from_note_string('C4')
+            >>> n2 = Note('C', 4)
+            >>> n1 != n2
+            False
+            >>> n1 = Note.from_note_string('C4#')
+            >>> n2 = Note.from_note_string('D4b')
+            >>> n1 != n2
+            True    
+        """
         # TODO: tests
         return not self.__eq__(other)
 
     def __lt__(self, other):
-        # TODO: docstring
+        """Check if this note is less than another note.
+
+        Does not consider `enharmonic notes <https://en.wikipedia.org/wiki/Enharmonic>`_ to be equal.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this note to.
+
+        Returns:
+            bool
+                True if this note is less than the other, otherwise false.
+
+        Examples:
+            >>> n1 = Note.from_note_string('C4')
+            >>> n2 = Note('C', 4)
+            >>> n1 < n2
+            False
+            >>> n1 = Note.from_note_string('D4')
+            >>> n2 = Note.from_note_string('G4')
+            >>> n1 < n2
+            True
+            >>> n2 < n1
+            False    
+        """
         # TODO: tests
         if self.__eq__(other):
             return false
@@ -283,7 +355,30 @@ class Note(object):
         return self.midi_note_number() < other.midi_note_number()
 
     def __gt__(self, other):
-        # TODO: docstring
+        """Check if this note is greater than another note.
+
+        Does not consider `enharmonic notes <https://en.wikipedia.org/wiki/Enharmonic>`_ to be equal.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this note to.
+
+        Returns:
+            bool
+                True if this note is greater than the other, otherwise false.
+
+        Examples:
+            >>> n1 = Note.from_note_string('C4')
+            >>> n2 = Note('C', 4)
+            >>> n1 > n2
+            False
+            >>> n1 = Note.from_note_string('D4')
+            >>> n2 = Note.from_note_string('G4')
+            >>> n1 > n2
+            False
+            >>> n2 > n1
+            True 
+        """
         # TODO: tests
         if self.__eq__(other):
             return false
@@ -296,12 +391,54 @@ class Note(object):
         return self.midi_note_number() > other.midi_note_number()
 
     def __le__(self, other):
-        # TODO: docstring
+        """Check if this note is less than or equal to another note.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this note to.
+
+        Returns:
+            bool
+                True if this note is less than or equal to the other, otherwise false.
+
+        Examples:
+            >>> n1 = Note.from_note_string('C4')
+            >>> n2 = Note('C', 4)
+            >>> n1 < n2
+            True
+            >>> n1 = Note.from_note_string('D4')
+            >>> n2 = Note.from_note_string('G4')
+            >>> n1 < n2
+            True
+            >>> n2 < n1
+            False    
+        """
         # TODO: tests
         return not self.__gt__(other)
 
     def __ge__(self, other):
-        # TODO: docstring
+        """Check if this note is greater than or equal to another note.
+        
+        Args:
+            other : :attr:`~music_essentials.note.Note`
+                The note to compare this note to.
+
+        Returns:
+            bool
+                True if this note is greater than or equal to the other, otherwise false.
+
+        Examples:
+            >>> n1 = Note.from_note_string('C4')
+            >>> n2 = Note('C', 4)
+            >>> n1 > n2
+            True
+            >>> n1 = Note.from_note_string('D4')
+            >>> n2 = Note.from_note_string('G4')
+            >>> n1 > n2
+            False
+            >>> n2 > n1
+            True 
+        """
         # TODO: tests
         return not self.__lt__(other)
 
