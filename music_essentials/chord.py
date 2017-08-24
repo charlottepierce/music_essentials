@@ -23,3 +23,12 @@ class Chord(object):
                 return
 
         self.notes.append(new_note)
+    
+    def __str__(self):
+        # TODO: docstring
+        out = ''
+        for n in self.notes:
+            out += n.__str__() + '+'
+        out = out [:-1]
+        
+        return out
