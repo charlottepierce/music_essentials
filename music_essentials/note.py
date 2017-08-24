@@ -29,11 +29,11 @@ class Note(object):
                 The accidental to apply to the note. Should be one of :attr:`~music_essentials.note.Note.VALID_ACCIDENTALS`.
 
         Returns:
-            Note
+            :attr:`~music_essentials.note.Note`
                 A new note with the given pitch, octave, and accidental.
 
         Raises:
-            ValueError
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid pitch, octave, or accidental is provided.
 
         Examples:
@@ -93,11 +93,11 @@ class Note(object):
                 The accidental is optional, but if used should be one of :attr:`~music_essentials.note.Note.VALID_ACCIDENTALS`.
 
         Returns:
-            Note
+            :attr:`~music_essentials.note.Note`
                 A new note with the given pitch, octave, and accidental.
 
         Raises:
-            ValueError
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid pitch, octave, or accidental is provided.
 
         Examples:
@@ -167,7 +167,7 @@ class Note(object):
                 The interval to add to this note.
 
         Returns:
-            Note
+            :attr:`~music_essentials.note.Note`
                 The new note that comes from adding the provided interval to this note.
 
         Examples:
