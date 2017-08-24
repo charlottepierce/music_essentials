@@ -4,6 +4,7 @@
 from .interval import Interval, _TONE, _SEMITONE, _TONE_AND_HALF
 
 class Scale(object):
+    """Static class methods for building lists of notes according to pre-defined patterns."""
     _MAJOR = (_TONE, _TONE, _SEMITONE, _TONE, _TONE, _TONE, _SEMITONE)
     _HARMONIC_MINOR = (_TONE, _SEMITONE, _TONE, _TONE, _SEMITONE, _TONE_AND_HALF, _SEMITONE)
     _NATURAL_MINOR = (_TONE, _SEMITONE, _TONE, _TONE, _SEMITONE, _TONE, _TONE)
@@ -19,8 +20,28 @@ class Scale(object):
 
     @classmethod
     def build_scale(cls, tonic, scale_type):
-        # TODO: docstring (does support building of theoretical scales, as long as the result doesn't contain any accidentals above double sharps/flats)
-        # TODO: validation (and tests for validation)
+        """Build a scale.
+
+        The scale will be built from the provided tonic, for one ascending octave.
+        If building the scale will result in creating an invalid note (e.g., a note
+        for which there is no MIDI number), the program will crash.
+
+        Args:
+            tonic : :attr:`~music_essentials.note.Note`
+                The tonic note of the scale.
+            
+            scale_type : str
+                The type of scale to build. Supported scale types are:
+
+                * 'major'/'maj': major scale
+                * 'minor'/'min': harmonic minor scale
+                * 'natural minor'/'nat min': natural minor scale
+
+        Returns
+            list
+                The notes in the specified scale, in ascending order.
+        """
+        # TODO: tests
         scale_pattern = Scale._SCALE_PATTERNS[scale_type]
         scale = [tonic]
         for diff in scale_pattern:
