@@ -28,6 +28,7 @@ class Chord(object):
             C4+E4
         """
         # TODO: validation
+        # TODO: tests
         self.notes = [root_note]
     
     def root(self):
