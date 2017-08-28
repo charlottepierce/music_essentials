@@ -1,6 +1,7 @@
 # TODO: specify number of octaves
 # TODO: specify direction
 
+from .note import Note
 from .interval import Interval, _TONE, _SEMITONE, _TONE_AND_HALF
 
 class Scale(object):
@@ -37,11 +38,19 @@ class Scale(object):
                 * 'minor'/'min': harmonic minor scale
                 * 'natural minor'/'nat min': natural minor scale
 
-        Returns
+        Returns:
             list
                 The notes in the specified scale, in ascending order.
+
+        Raises:
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
+                If an invalid tonic or scale type is provided.
         """
-        # TODO: tests
+        if not isinstance(tonic, Note):
+            raise ValueError('Expected Note for tonic, got ' + str(tonic))
+        if scale_type not in Scale._SCALE_PATTERNS.keys():
+            raise ValueError('Unknown scale type \'' + str(scale_type + '\''))
+
         scale_pattern = Scale._SCALE_PATTERNS[scale_type]
         scale = [tonic]
         for diff in scale_pattern:
