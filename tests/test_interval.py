@@ -109,3 +109,8 @@ def test_interval_creation_incorrect_size_string():
 def test_manual_interval_creation_incorrect_interval_combination():
     with pytest.raises(ValueError):
         i = Interval.from_interval_string('P6')
+
+# Test __str__
+def test_simple_interval_string():
+    i = Interval('M', 7)
+    assert i.__str__() == 'M7'

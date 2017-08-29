@@ -67,6 +67,13 @@ def test_simple_note_add_under():
     notes = [Note.from_note_string('C4'), Note.from_note_string('D4')]
     assert c.notes == notes
 
+def test_simple_note_add_middle():
+    c = Chord(Note.from_note_string('C4'))
+    c.add_note(Note.from_note_string('E4'))
+    c.add_note(Note.from_note_string('D4'))
+    notes = [Note.from_note_string('C4'), Note.from_note_string('D4'), Note.from_note_string('E4')]
+    assert c.notes == notes
+
 def test_multi_note_add_under():
     c = Chord(Note.from_note_string('D4'))
     c.add_note(Note.from_note_string('C4'))

@@ -81,3 +81,19 @@ def test_fifth_addition_over_octave():
     i = Interval.from_interval_string('P5')
     res = n + i
     assert (res.pitch == 'E') and (res.octave == 5) and (res.accidental is None)
+
+# Invalid additions
+def test_note_int_add_rejection():
+    n = Note.from_note_string('A4')
+    with pytest.raises(TypeError):
+        n + 1
+
+def test_note_float_add_rejection():
+    n = Note.from_note_string('A4')
+    with pytest.raises(TypeError):
+        n + 7.3
+
+def test_note_str_add_rejection():
+    n = Note.from_note_string('A4')
+    with pytest.raises(TypeError):
+        n + 'interval'
