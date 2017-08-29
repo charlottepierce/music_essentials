@@ -76,7 +76,6 @@ class Chord(object):
             >>> print(c)
             D4+E4+G4
         """
-        # TODO: tests
         if new_note < self.root():
             self.notes.insert(0, new_note)
             return
