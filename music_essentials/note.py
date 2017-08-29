@@ -36,6 +36,9 @@ class Note(object):
             `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid pitch, octave, or accidental is provided.
 
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If an incorrect type of value is given for pitch, octave, or accidental.
+
         Examples:
             >>> n = Note('A', 4, '##')
             >>> print(n)
@@ -47,16 +50,16 @@ class Note(object):
             ValueError: Invalid pitch: x
         """
         if not isinstance(pitch, str):
-            raise ValueError('Expected string for pitch, got: ' + str(pitch))
+            raise TypeError('Expected string for pitch, got: ' + str(pitch))
         if pitch.upper() not in Note.VALID_PITCHES:
-            raise ValueError('Invalid pitch: ' + str(pitch))
+            raise TypeError('Invalid pitch: ' + str(pitch))
 
         try:
             int(octave) # test if octave value is a number
         except:
-            raise ValueError('Expected integer for octave, got: ' + str(octave))
+            raise TypeError('Expected integer for octave, got: ' + str(octave))
         if '.' in str(octave): # check that the number doesn't have a decimal place
-            raise ValueError('Expected integer for octave, got ' + str(octave))
+            raise TypeError('Expected integer for octave, got ' + str(octave))
         if (int(octave) < -1) or (int(octave) > 9):
             raise ValueError('Octave needs to be in the range [-1, 9], got: ' + str(octave))
 
@@ -100,6 +103,9 @@ class Note(object):
             `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid pitch, octave, or accidental is provided.
 
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the provided note string is not a string.
+
         Examples:
             >>> n = Note.from_note_string('A4##')
             >>> print(n)
@@ -110,6 +116,9 @@ class Note(object):
             >>> n = Note.from_note_string('x6')
             ValueError: Invalid pitch: x
         """
+        if not isinstance(note_string, str):
+            raise TypeError('Expected string for note string, got \'' + str(note_string + '\''))
+
         pitch = note_string[0]
         octave = note_string[1]
         accidental = note_string[2:]
@@ -169,6 +178,10 @@ class Note(object):
         Returns:
             :attr:`~music_essentials.note.Note`
                 The new note that comes from adding the provided interval to this note.
+
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to add is not an :attr:`~music_essentials.interval.Interval`.
 
         Examples:
             >>> n = Note.from_note_string('C4')
@@ -249,6 +262,9 @@ class Note(object):
             `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If anything other than a :attr:`~music_essentials.note.Note` is given to compare to.
 
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
+
         Examples:
             >>> n1 = Note('C', 4)
             >>> n2 = Note('D', 4)
@@ -268,7 +284,7 @@ class Note(object):
             True
         """
         if not isinstance(other, Note):
-            raise ValueError('Expected comparator to be an instance of Note, got ' + str(other))
+            raise TypeError('Expected comparator to be an instance of Note, got ' + str(other))
 
         return self.midi_note_number() == other.midi_note_number()
 
@@ -285,6 +301,10 @@ class Note(object):
             bool
                 True if the notes have the same pitch, octave, and accidentals; otherwise false.
 
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
+
         Examples:
             >>> n1 = Note.from_note_string('C4')
             >>> n2 = Note('C', 4)
@@ -296,7 +316,7 @@ class Note(object):
             False        
         """
         if not isinstance(other, Note):
-            raise ValueError('Can not check equality between Note and \'' + str(other) + '\'')
+            raise TypeError('Can not check equality between Note and \'' + str(other) + '\'')
 
         return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
 
@@ -312,6 +332,10 @@ class Note(object):
         Returns:
             bool
                 True if the notes do not have the same pitch, octave, and accidentals; otherwise false.
+
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
 
         Examples:
             >>> n1 = Note.from_note_string('C4')
@@ -339,6 +363,10 @@ class Note(object):
             bool
                 True if this note is less than the other, otherwise false.
 
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
+
         Examples:
             >>> n1 = Note.from_note_string('C4')
             >>> n2 = Note('C', 4)
@@ -352,7 +380,7 @@ class Note(object):
             False    
         """
         if not isinstance(other, Note):
-            raise ValueError('Can not check equality between Note and \'' + str(other) + '\'')
+            raise TypeError('Can not check equality between Note and \'' + str(other) + '\'')
 
         if self.__eq__(other):
             return False
@@ -378,6 +406,10 @@ class Note(object):
             bool
                 True if this note is greater than the other, otherwise false.
 
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
+
         Examples:
             >>> n1 = Note.from_note_string('C4')
             >>> n2 = Note('C', 4)
@@ -391,7 +423,7 @@ class Note(object):
             True 
         """
         if not isinstance(other, Note):
-            raise ValueError('Can not check equality between Note and \'' + str(other) + '\'')
+            raise TypeError('Can not check equality between Note and \'' + str(other) + '\'')
 
         if self.__eq__(other):
             return False
@@ -413,6 +445,10 @@ class Note(object):
         Returns:
             bool
                 True if this note is less than or equal to the other, otherwise false.
+
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
 
         Examples:
             >>> n1 = Note.from_note_string('C4')
@@ -438,6 +474,10 @@ class Note(object):
         Returns:
             bool
                 True if this note is greater than or equal to the other, otherwise false.
+
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the object to compare to is not a :attr:`~music_essentials.note.Note`.
 
         Examples:
             >>> n1 = Note.from_note_string('C4')

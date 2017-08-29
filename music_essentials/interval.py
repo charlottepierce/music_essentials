@@ -43,6 +43,9 @@ class Interval(object):
         Raises:
             `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid interval type, size, or combination of type and size is provided.
+
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the interval type is not a string, or size is not an integer.
         
         Examples:
             >>> i = Interval('M', 3)
@@ -58,15 +61,20 @@ class Interval(object):
             >>> i = Interval('M', 5)
             ValueError: Impossible interval specified: M5
         """
+        if not isinstance(interval_type, str):
+            raise TypeError('Expected string for interval type, got \'' + str(interval_type) + '\'')
+        if not isinstance(size, int):
+            raise TypeError('Expected integer for interval size, got \'' + str(size) + '\'')
+
         if interval_type not in Interval.NAMED_INTERVAL_TYPES:
             raise ValueError('Unsupported interval type specified: ' + str(interval_type))
 
         try:
             int(size) # test if distance value is a number
         except:
-            raise ValueError('Expected integer for interval distance, got: ' + str(size))
+            raise TypeError('Expected integer for interval distance, got: ' + str(size))
         if '.' in str(size): # check that the distance number doesn't have a decimal place
-            raise ValueError('Expected integer for interval distance, got: ' + str(size))
+            raise TypeError('Expected integer for interval distance, got: ' + str(size))
         if int(size) <= 0:
             raise ValueError('Expected interval distance to be positive, got: ' + str(size))
 
@@ -109,6 +117,9 @@ class Interval(object):
         Raises:
             `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
                 If an invalid interval type, size, or combination of type and size is provided.
+
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the interval string is not a string.
         
         Examples:
             >>> i = Interval.from_interval_string('M3')
@@ -124,6 +135,9 @@ class Interval(object):
             >>> i = Interval.from_interval_string('M5')
             ValueError: Impossible interval specified: M5
         """
+        if not isinstace(interval_string, str):
+            raise TypeError('Expected string for interval string, got \'' + str(interval_string + '\''))
+
         for i in Interval.NAMED_INTERVAL_TYPES:
             if interval_string.startswith(i):
                 interval_type = i

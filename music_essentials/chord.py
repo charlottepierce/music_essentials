@@ -21,7 +21,7 @@ class Chord(object):
                 A new chord object, with a single note added.
 
         Raises:
-            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
                 If anything but an instance of :attr:`~music_essentials.note.Note` is provided for `root_note`.
         
         Examples:
@@ -36,7 +36,7 @@ class Chord(object):
             Expected Note for root note, got '5.5'
         """
         if not isinstance(root_note, Note):
-            raise ValueError('Expected Note for root note, got \'' + str(root_note) + '\'')
+            raise TypeError('Expected Note for root note, got \'' + str(root_note) + '\'')
 
         self.notes = [root_note]
     
@@ -65,6 +65,10 @@ class Chord(object):
             new_note : :attr:`~music_essentials.note.Note`
                 The note to add.
 
+        Raises:
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If `new_note` is not an instance of :attr:`~music_essentials.note.Note`.
+
         Examples:
             >>> c = Chord(Note.from_note_string('C4'))
             >>> c.add_note(Note.from_note_string('E4'))
@@ -76,6 +80,9 @@ class Chord(object):
             >>> print(c)
             D4+E4+G4
         """
+        if not isinstance(new_note, Note):
+            raise TypeError('Expected Note for new note, got \'' + str(new_note + '\''))
+
         if new_note < self.root():
             self.notes.insert(0, new_note)
             return

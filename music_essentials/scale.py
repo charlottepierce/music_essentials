@@ -44,10 +44,15 @@ class Scale(object):
 
         Raises:
             `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
-                If an invalid tonic or scale type is provided.
+                If an scale type is provided.
+
+            `TypeError: <https://docs.python.org/2/library/exceptions.html#exceptions.TypeError>`_
+                If the tonic is not a :attr:`~music_essentials.note.Note`., or scale type is not a string.
         """
         if not isinstance(tonic, Note):
-            raise ValueError('Expected Note for tonic, got ' + str(tonic))
+            raise TypeError('Expected Note for tonic, got ' + str(tonic))
+        if not isinstance(scale_type, str):
+            raise TypeError('Expected string for scale type, got ' + str(scale_type))
         if scale_type not in Scale._SCALE_PATTERNS.keys():
             raise ValueError('Unknown scale type \'' + str(scale_type + '\''))
 
