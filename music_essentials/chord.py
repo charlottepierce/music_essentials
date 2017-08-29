@@ -94,7 +94,6 @@ class Chord(object):
             str
                 A string representation of the chord, in the form ``<note_1>+<note_2>+...+<note_n>``.
         """
-        # TODO: tests
         out = ''
         for n in self.notes:
             out += n.__str__() + '+'

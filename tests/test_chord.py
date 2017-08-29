@@ -73,3 +73,18 @@ def test_multi_note_add_under():
     c.add_note(Note.from_note_string('B3'))
     notes = [Note.from_note_string('B3'), Note.from_note_string('C4'), Note.from_note_string('D4')]
     assert c.notes == notes
+
+# Test __str__
+def test_single_chord_str():
+    c = Chord(Note.from_note_string('D4'))
+    assert c.__str__() == 'D4'
+
+def test_simple_two_note_str():
+    c = Chord(Note.from_note_string('C4'))
+    c.add_note(Note.from_note_string('E4'))
+    assert c.__str__() == 'C4+E4'
+
+def test_simple_two_note_str_add_under():
+    c = Chord(Note.from_note_string('C4'))
+    c.add_note(Note.from_note_string('B3'))
+    assert c.__str__() == 'B3+C4'
