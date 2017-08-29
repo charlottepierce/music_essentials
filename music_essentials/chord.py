@@ -1,6 +1,8 @@
 # TODO: instantiate chord with multiple notes
 # TODO: add_note support note string
 
+from .note import Note
+
 class Chord(object):
     """Representation of group of notes that are played together."""
 
@@ -17,6 +19,10 @@ class Chord(object):
         Returns:
             :attr:`~music_essentials.chord.Chord`
                 A new chord object, with a single note added.
+
+        Raises:
+            `ValueError: <https://docs.python.org/2/library/exceptions.html#exceptions.ValueError>`_
+                If anything but an instance of :attr:`~music_essentials.note.Note` is provided for `root_note`.
         
         Examples:
             >>> c = Chord(Note.from_note_string('C4'))
@@ -26,9 +32,12 @@ class Chord(object):
             >>> c.add_note(Note.from_note_string('E4'))
             >>> print(c)
             C4+E4
+            >>> c = Chord(5.5)
+            Expected Note for root note, got '5.5'
         """
-        # TODO: validation
-        # TODO: tests
+        if not isinstance(root_note, Note):
+            raise ValueError('Expected Note for root note, got \'' + str(root_note) + '\'')
+
         self.notes = [root_note]
     
     def root(self):
