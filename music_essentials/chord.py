@@ -56,7 +56,6 @@ class Chord(object):
             >>> print(c.root())
             D4
         """
-        # TODO: tests
         return self.notes[0]
 
     def add_note(self, new_note):
