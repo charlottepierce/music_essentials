@@ -356,3 +356,24 @@ def test_greater_than_or_equal_reject_str():
     n1 = Note.from_note_string('G5')
     with pytest.raises(ValueError):
         n1 >= 'o'
+
+# Test __str__
+def test_simple_note_to_str():
+    n1 = Note.from_note_string('G5')
+    assert n1.__str__() == 'G5'
+
+def test_note_to_str_flat():
+    n1 = Note.from_note_string('G5b')
+    assert n1.__str__() == 'G5b'
+
+def test_note_to_str_double_flat():
+    n1 = Note.from_note_string('G5bb')
+    assert n1.__str__() == 'G5bb'
+
+def test_note_to_str_sharp():
+    n1 = Note.from_note_string('G5#')
+    assert n1.__str__() == 'G5#'
+
+def test_note_to_str_double_sharp():
+    n1 = Note.from_note_string('G5##')
+    assert n1.__str__() == 'G5##'
