@@ -295,7 +295,9 @@ class Note(object):
             >>> n1 == n2
             False        
         """
-        # TODO: tests
+        if not isinstance(other, Note):
+            raise ValueError('Can not check equality between Note and \'' + str(other) + '\'')
+
         return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
 
     def __ne__(self, other):
@@ -321,13 +323,13 @@ class Note(object):
             >>> n1 != n2
             True    
         """
-        # TODO: tests
         return not self.__eq__(other)
 
     def __lt__(self, other):
         """Check if this note is less than another note.
 
         Does not consider `enharmonic notes <https://en.wikipedia.org/wiki/Enharmonic>`_ to be equal.
+        If two notes are enharmonic, the note with the lower written pitch is considered lower.
         
         Args:
             other : :attr:`~music_essentials.note.Note`
@@ -349,9 +351,11 @@ class Note(object):
             >>> n2 < n1
             False    
         """
-        # TODO: tests
+        if not isinstance(other, Note):
+            raise ValueError('Can not check equality between Note and \'' + str(other) + '\'')
+
         if self.__eq__(other):
-            return false
+            return False
 
         if self.is_enharmonic(other):
             if self.octave != other.octave:
@@ -364,6 +368,7 @@ class Note(object):
         """Check if this note is greater than another note.
 
         Does not consider `enharmonic notes <https://en.wikipedia.org/wiki/Enharmonic>`_ to be equal.
+        If two notes are enharmonic, the note with the higher written pitch is considered higher.
         
         Args:
             other : :attr:`~music_essentials.note.Note`
@@ -385,9 +390,11 @@ class Note(object):
             >>> n2 > n1
             True 
         """
-        # TODO: tests
+        if not isinstance(other, Note):
+            raise ValueError('Can not check equality between Note and \'' + str(other) + '\'')
+
         if self.__eq__(other):
-            return false
+            return False
 
         if self.is_enharmonic(other):
             if self.octave != other.octave:
@@ -419,7 +426,6 @@ class Note(object):
             >>> n2 < n1
             False    
         """
-        # TODO: tests
         return not self.__gt__(other)
 
     def __ge__(self, other):
@@ -445,7 +451,6 @@ class Note(object):
             >>> n2 > n1
             True 
         """
-        # TODO: tests
         return not self.__lt__(other)
 
     def __str__(self):

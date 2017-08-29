@@ -181,3 +181,178 @@ def test_non_enharmonic_notes():
     n1 = Note.from_note_string('G5')
     n2 = Note.from_note_string('G5b')
     assert n1.is_enharmonic(n2) == False
+
+# Test __eq__ and __ne__
+def test_simple_equality():
+    n1 = Note.from_note_string('G5')
+    n2 = Note.from_note_string('G5')
+    assert n1 == n2
+
+def test_equality_reject_int():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 == 1
+
+def test_equality_reject_float():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 == 5.2
+
+def test_equality_reject_str():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 == 'o'
+
+def test_enharmonic_inequality():
+    n1 = Note.from_note_string('C5#')
+    n2 = Note.from_note_string('D5b')
+    assert n1 != n2
+
+def test_inequality_reject_int():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 != 1
+
+def test_inequality_reject_float():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 != 5.2
+
+def test_inequality_reject_str():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 != 'o'
+
+# Test __lt__
+def test_simple_less_than():
+    n1 = Note.from_note_string('C5')
+    n2 = Note.from_note_string('D5')
+    assert n1 < n2
+
+def test_less_than_over_octave():
+    n1 = Note.from_note_string('B4')
+    n2 = Note.from_note_string('C5')
+    assert n1 < n2
+
+def test_enharmonic_less_than():
+    n1 = Note.from_note_string('C5#')
+    n2 = Note.from_note_string('D5b')
+    assert n1 < n2
+
+def test_less_than_reject_int():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 < 1
+
+def test_less_than_reject_float():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 < 5.2
+
+def test_less_than_reject_str():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 < 'o'
+
+# Test __gt__
+def test_simple_greater_than():
+    n1 = Note.from_note_string('D5')
+    n2 = Note.from_note_string('C5')
+    assert n1 > n2
+
+def test_greater_than_over_octave():
+    n1 = Note.from_note_string('C5')
+    n2 = Note.from_note_string('B4')
+    assert n1 > n2
+
+def test_enharmonic_greater_than():
+    n1 = Note.from_note_string('D5b')
+    n2 = Note.from_note_string('C5#')
+    assert n1 > n2
+
+def test_greater_than_reject_int():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 > 1
+
+def test_greater_than_reject_float():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 > 5.2
+
+def test_greater_than_reject_str():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 > 'o'
+
+# Test __le__
+def test_less_than_or_equal():
+    n1 = Note.from_note_string('C5')
+    n2 = Note.from_note_string('C5')
+    assert n1 <= n2
+
+def test_simple_less_than_or_equal():
+    n1 = Note.from_note_string('C5')
+    n2 = Note.from_note_string('D5')
+    assert n1 <= n2
+
+def test_less_than_over_octave_or_equal():
+    n1 = Note.from_note_string('B4')
+    n2 = Note.from_note_string('C5')
+    assert n1 <= n2
+
+def test_enharmonic_less_than_or_equal():
+    n1 = Note.from_note_string('C5#')
+    n2 = Note.from_note_string('D5b')
+    assert n1 <= n2
+
+def test_less_than_or_equal_reject_int():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 <= 1
+
+def test_less_than_or_equal_reject_float():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 <= 5.2
+
+def test_less_than_or_equal_reject_str():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 <= 'o'
+
+# Test __ge__
+def test_greater_than_or_equal():
+    n1 = Note.from_note_string('D5')
+    n2 = Note.from_note_string('D5')
+    assert n1 >= n2
+
+def test_simple_greater_than_or_equal():
+    n1 = Note.from_note_string('D5')
+    n2 = Note.from_note_string('C5')
+    assert n1 >= n2
+
+def test_greater_than_or_equal_over_octave():
+    n1 = Note.from_note_string('C5')
+    n2 = Note.from_note_string('B4')
+    assert n1 >= n2
+
+def test_enharmonic_greater_than_or_equal():
+    n1 = Note.from_note_string('D5b')
+    n2 = Note.from_note_string('C5#')
+    assert n1 >= n2
+
+def test_greater_than_or_equal_reject_int():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 >= 1
+
+def test_greater_than_or_equal_reject_float():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 >= 5.2
+
+def test_greater_than_or_equal_reject_str():
+    n1 = Note.from_note_string('G5')
+    with pytest.raises(ValueError):
+        n1 >= 'o'
