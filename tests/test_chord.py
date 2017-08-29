@@ -12,15 +12,15 @@ def test_correct_note_list():
     assert c.notes == [Note.from_note_string('C4')]
 
 def test_incorrect_root_int():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         c = Chord(1)
 
 def test_incorrect_root_float():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         c = Chord(7.2)
 
 def test_incorrect_root_str():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         c = Chord('A note!')
 
 # Test retrieval of root note

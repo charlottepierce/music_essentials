@@ -52,7 +52,7 @@ class Note(object):
         if not isinstance(pitch, str):
             raise TypeError('Expected string for pitch, got: ' + str(pitch))
         if pitch.upper() not in Note.VALID_PITCHES:
-            raise TypeError('Invalid pitch: ' + str(pitch))
+            raise ValueError('Invalid pitch: ' + str(pitch))
 
         try:
             int(octave) # test if octave value is a number

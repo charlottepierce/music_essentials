@@ -54,7 +54,7 @@ class Scale(object):
         if not isinstance(scale_type, str):
             raise TypeError('Expected string for scale type, got ' + str(scale_type))
         if scale_type not in Scale._SCALE_PATTERNS.keys():
-            raise ValueError('Unknown scale type \'' + str(scale_type + '\''))
+            raise ValueError('Unknown scale type \'' + str(scale_type) + '\'')
 
         scale_pattern = Scale._SCALE_PATTERNS[scale_type]
         scale = [tonic]

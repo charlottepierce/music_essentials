@@ -62,15 +62,15 @@ def test_manual_note_creation_incorrect_pitch_lowercase():
         n = Note('p', 4, 'b')
 
 def test_manual_note_creation_incorrect_pitch_integer():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n = Note(7, 4, 'b')
 
 def test_manual_note_creation_invalid_octave():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n = Note('A', 'y', '##')
 
 def test_manual_note_creation_incorrect_octave_decimal():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n = Note('A', 5.5, '##')
 
 def test_manual_note_creation_incorrect_octave_low():
@@ -107,7 +107,7 @@ def test_note_creation_incorrect_pitch_lowercase():
         n = Note.from_note_string('p4b')
 
 def test_note_creation_invalid_octave():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n = Note.from_note_string('Ay##')
 
 def test_note_creation_incorrect_octave_decimal():
@@ -135,7 +135,7 @@ def test_note_creation_no_pitch():
         n = Note.from_note_string('4bb')
 
 def test_note_creation_no_octave():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n = Note.from_note_string('C#')
 
 def test_note_creation_midi_num_low():
@@ -149,12 +149,12 @@ def test_note_creation_midi_num_high():
 # Test detection of enharmonic notes
 def test_enharmonic_notes_wrong_parameter_type_int():
     n1 = Note.from_note_string('C4')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1.is_enharmonic(3)
 
 def test_enharmonic_notes_wrong_parameter_type_str():
     n1 = Note.from_note_string('C4')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1.is_enharmonic('hello')
 
 def test_enharmonic_notes_identical():
@@ -190,17 +190,17 @@ def test_simple_equality():
 
 def test_equality_reject_int():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 == 1
 
 def test_equality_reject_float():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 == 5.2
 
 def test_equality_reject_str():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 == 'o'
 
 def test_enharmonic_inequality():
@@ -210,17 +210,17 @@ def test_enharmonic_inequality():
 
 def test_inequality_reject_int():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 != 1
 
 def test_inequality_reject_float():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 != 5.2
 
 def test_inequality_reject_str():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 != 'o'
 
 # Test __lt__
@@ -241,17 +241,17 @@ def test_enharmonic_less_than():
 
 def test_less_than_reject_int():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 < 1
 
 def test_less_than_reject_float():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 < 5.2
 
 def test_less_than_reject_str():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 < 'o'
 
 # Test __gt__
@@ -272,17 +272,17 @@ def test_enharmonic_greater_than():
 
 def test_greater_than_reject_int():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 > 1
 
 def test_greater_than_reject_float():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 > 5.2
 
 def test_greater_than_reject_str():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 > 'o'
 
 # Test __le__
@@ -308,17 +308,17 @@ def test_enharmonic_less_than_or_equal():
 
 def test_less_than_or_equal_reject_int():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 <= 1
 
 def test_less_than_or_equal_reject_float():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 <= 5.2
 
 def test_less_than_or_equal_reject_str():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 <= 'o'
 
 # Test __ge__
@@ -344,17 +344,17 @@ def test_enharmonic_greater_than_or_equal():
 
 def test_greater_than_or_equal_reject_int():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 >= 1
 
 def test_greater_than_or_equal_reject_float():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 >= 5.2
 
 def test_greater_than_or_equal_reject_str():
     n1 = Note.from_note_string('G5')
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         n1 >= 'o'
 
 # Test __str__
