@@ -12,6 +12,7 @@ Index of music_essentials's documentation
     note
     interval
     scale
+    chord
 
 
 Indices and tables
