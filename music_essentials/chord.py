@@ -2,9 +2,31 @@
 # TODO: add_note support note string
 
 from .note import Note
+from .scale import Scale
+from .interval import Interval
 
 class Chord(object):
     """Representation of group of notes that are played together."""
+
+    _MAJOR = ('M3', 'm3')
+    _MINOR = ('m3', 'M3')
+    
+    _CHORD_PATTERNS = {
+        'major': _MAJOR,
+        'maj': _MAJOR,
+        'minor': _MINOR,
+        'min': _MINOR
+    }
+
+    _CHORD_NUM_SCALE_INDEX = {
+        'I' : 0,
+        'II' : 1,
+        'III': 2,
+        'IV': 3,
+        'V': 4,
+        'VI': 5,
+        'VII': 6,
+        'VIII': 7}
 
     def __init__(self, root_note):
         """Create a new Chord.
@@ -39,6 +61,20 @@ class Chord(object):
             raise TypeError('Expected Note for root note, got \'' + str(root_note) + '\'')
 
         self.notes = [root_note]
+
+    @classmethod
+    def build_chord(cls, tonic_key, chord_number, chord_type):
+        # TODO: docstring
+        # TODO: tests
+        # TODO: validation
+        s = Scale.build_scale(tonic_key, chord_type)
+        root = s[Chord._CHORD_NUM_SCALE_INDEX[chord_number]]
+        cls = Chord(root)
+        for interval_str in Chord._CHORD_PATTERNS[chord_type]:
+            i = Interval.from_interval_string(interval_str)
+            cls.add_note(cls.notes[-1] + i)
+
+        return cls
     
     def root(self):
         """Get the root (i.e., lowest) note of the chord.
