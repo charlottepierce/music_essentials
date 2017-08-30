@@ -75,7 +75,10 @@ class Chord(object):
             cls.add_note(cls.notes[-1] + i)
 
         if base:
-            cls.notes[0] = s[Chord._CHORD_NUM_SCALE_INDEX[base]]
+            b = s[Chord._CHORD_NUM_SCALE_INDEX[base]]
+            if b in cls.notes:
+                b.octave -= 1
+            cls.notes.insert(0, b)
 
         return cls
     
