@@ -63,7 +63,7 @@ class Chord(object):
         self.notes = [root_note]
 
     @classmethod
-    def build_chord(cls, tonic_key, chord_number, chord_type, base=None):
+    def build_chord(cls, tonic_key, chord_number, chord_type):
         # TODO: docstring
         # TODO: tests
         # TODO: validation
@@ -73,12 +73,6 @@ class Chord(object):
         for interval_str in Chord._CHORD_PATTERNS[chord_type]:
             i = Interval.from_interval_string(interval_str)
             cls.add_note(cls.notes[-1] + i)
-
-        if base:
-            b = s[Chord._CHORD_NUM_SCALE_INDEX[base]]
-            if b in cls.notes:
-                b.octave -= 1
-            cls.notes.insert(0, b)
 
         return cls
     
