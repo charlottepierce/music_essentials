@@ -116,3 +116,22 @@ def test_chord_unsupported_chord_num():
 def test_chord_unsupported_chord_type():
     with pytest.raises(ValueError):
         Chord.build_chord(Note.from_note_string('C4'), 'V', 'doobly`')
+
+# Test chord building
+def test_simple_major_chord_build():
+    c = Chord.build_chord(Note.from_note_string('C4'), 'I', 'major')
+    expected = [Note.from_note_string('C4'), Note.from_note_string('E4'), Note.from_note_string('G4')]
+
+    assert c.notes == expected
+
+def test_simple_minor_chord_build():
+    c = Chord.build_chord(Note.from_note_string('C4'), 'I', 'minor')
+    expected = [Note.from_note_string('C4'), Note.from_note_string('E4b'), Note.from_note_string('G4')]
+
+    assert c.notes == expected
+
+def test_over_octave_chord_build():
+    c = Chord.build_chord(Note.from_note_string('G4'), 'II', 'major')
+    expected = [Note.from_note_string('A4'), Note.from_note_string('C5'), Note.from_note_string('E5')]
+
+    assert c.notes == expected
