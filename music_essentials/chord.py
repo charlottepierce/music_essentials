@@ -64,9 +64,49 @@ class Chord(object):
 
     @classmethod
     def build_chord(cls, tonic_key, chord_number, chord_type):
-        # TODO: docstring
-        # TODO: tests
-        # TODO: validation
+        """Build a chord.
+
+        Specify the tonic key, the chord number, and the type of chord to build.
+        Receive an ordered list of the notes in the chord.
+
+        Args
+        ----
+            tonic_key : :attr:`~music_essentials.note.Note`
+                They key in which the chord should be built
+
+            chord_number : str
+                The scale degree to start building the chord on
+
+            chord_type : str
+                The tonality of the key to build the cord in. Can be one of:
+
+                * 'major'/'maj': Major tonality.
+                * 'minor'/'min': Minor tonality.
+
+        Returns
+        -------
+            list
+                The list of notes in the chord, in ascending order.
+
+        Examples
+        --------
+            >>> c = Chord.build_chord(Note.from_note_string('C4'), 'I', 'major')
+            >>> print(c)
+            >>> C4+E4+G4
+            >>> c = Chord.build_chord(Note.from_note_string('C4'), 'V', 'major')
+            >>> print(c)
+            >>> G4+B4+D5
+            >>> c = Chord.build_chord(Note.from_note_string('C4'), 'IV', 'minor')
+            >>> print(c)
+            >>> F4+A4b+C5
+        """
+        if not isinstance(tonic_key, Note):
+            raise TypeError('Expected Note for tonic key, got \'' + str(tonic_key) + '\'')
+        if not chord_number in Chord._CHORD_NUM_SCALE_INDEX.keys():
+            raise ValueError('Unsupported chord number: ' + str(chord_number))
+        if not chord_type in Chord._CHORD_PATTERNS.keys():
+            raise ValueError('Unsupported chord type: ' + str(chord_type))
+
         s = Scale.build_scale(tonic_key, chord_type)
         root = s[Chord._CHORD_NUM_SCALE_INDEX[chord_number]]
         cls = Chord(root)

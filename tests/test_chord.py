@@ -95,3 +95,24 @@ def test_simple_two_note_str_add_under():
     c = Chord(Note.from_note_string('C4'))
     c.add_note(Note.from_note_string('B3'))
     assert c.__str__() == 'B3+C4'
+
+# Test validation
+def test_chord_str_tonic():
+    with pytest.raises(TypeError):
+        Chord.build_chord('Hi', 'IV', 'maj')
+
+def test_chord_int_tonic():
+    with pytest.raises(TypeError):
+        Chord.build_chord(4, 'IV', 'maj')
+
+def test_chord_float_tonic():
+    with pytest.raises(TypeError):
+        Chord.build_chord(7.2, 'IV', 'maj')
+
+def test_chord_unsupported_chord_num():
+    with pytest.raises(ValueError):
+        Chord.build_chord(Note.from_note_string('C4'), 'VIIII', 'maj')
+
+def test_chord_unsupported_chord_type():
+    with pytest.raises(ValueError):
+        Chord.build_chord(Note.from_note_string('C4'), 'V', 'doobly`')
