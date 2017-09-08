@@ -8,8 +8,9 @@ from .interval import Interval
 class Chord(object):
     """Representation of group of notes that are played together."""
 
-    _MAJOR = ('M3', 'm3')
-    _MINOR = ('m3', 'M3')
+    # Difference in pitch index from the root note in the scale to each note in the chord
+    _MAJOR = (2, 4)
+    _MINOR = (2, 4)
     
     _CHORD_PATTERNS = {
         'major': _MAJOR,
@@ -108,14 +109,20 @@ class Chord(object):
             raise ValueError('Unsupported chord type: ' + str(chord_type))
 
         s = Scale.build_scale(tonic_key, chord_type)
-        root = s[Chord._CHORD_NUM_SCALE_INDEX[chord_number]]
+        root_idx = Chord._CHORD_NUM_SCALE_INDEX[chord_number]
+        root = s[root_idx]
         cls = Chord(root)
-        for interval_str in Chord._CHORD_PATTERNS[chord_type]:
-            i = Interval.from_interval_string(interval_str)
-            cls.add_note(cls.notes[-1] + i)
+        for index_diff in Chord._CHORD_PATTERNS[chord_type]:
+            next_idx = root_idx + index_diff
+            octave_diff = 0
+            if next_idx > (len(s) - 1):
+                next_idx -= len(s)
+                octave_diff += 1
+            next_note = s[next_idx]
+            cls.add_note(Note(next_note.pitch, next_note.octave + octave_diff, next_note.accidental))
 
         return cls
-    
+
     def root(self):
         """Get the root (i.e., lowest) note of the chord.
         
