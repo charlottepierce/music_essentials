@@ -124,6 +124,12 @@ def test_simple_major_chord_build():
 
     assert c.notes == expected
 
+def test_simple_major_chord_build_non_tonic():
+    c = Chord.build_chord(Note.from_note_string('C4'), 'V', 'major')
+    expected = [Note.from_note_string('G4'), Note.from_note_string('B4'), Note.from_note_string('D5')]
+
+    assert c.notes == expected
+
 def test_simple_minor_chord_build():
     c = Chord.build_chord(Note.from_note_string('C4'), 'I', 'minor')
     expected = [Note.from_note_string('C4'), Note.from_note_string('E4b'), Note.from_note_string('G4')]

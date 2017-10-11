@@ -116,7 +116,7 @@ class Chord(object):
             next_idx = root_idx + index_diff
             octave_diff = 0
             if next_idx > (len(s) - 1):
-                next_idx -= len(s)
+                next_idx -= len(s) - 1
                 octave_diff += 1
             next_note = s[next_idx]
             cls.add_note(Note(next_note.pitch, next_note.octave + octave_diff, next_note.accidental))
