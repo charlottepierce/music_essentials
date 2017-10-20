@@ -1,4 +1,8 @@
 # TODO: add duration?
+    # - check for valid durations?
+    # - test duration is assigned properly
+    # - add duration to note string?
+    # - print out duration
 # TODO: method to get vextab representation
 # TODO: add support for triple sharps/flats
 # TODO: add support for quadruple sharps/flats
@@ -14,7 +18,7 @@ class Note(object):
     VALID_ACCIDENTALS = ('#', '##', 'b', 'bb', None)
     """List of valid accidental representors."""
 
-    def __init__(self, pitch, octave, accidental=None):
+    def __init__(self, pitch, octave, accidental=None, duration=None, is_dotted=False):
         """Create a new Note.
 
         Args:
@@ -25,8 +29,15 @@ class Note(object):
                 The octave of the note. Should be in the range [-1, 9].
 
         Kwags:
-            accidental : str (default None)
+            accidental : str (default `None`)
                 The accidental to apply to the note. Should be one of :attr:`~music_essentials.note.Note.VALID_ACCIDENTALS`.
+
+            duration : float (default `None`)
+                The duration of the note, in terms of how many would fit into one bar in common time.
+                For example, a semibreve has a duration of 1; a quaver has a duration of 8.
+
+            dotted : boolean (default `False`)
+                If true, the duration of the note is multiplied by 1.5.
 
         Returns:
             :attr:`~music_essentials.note.Note`
@@ -76,6 +87,9 @@ class Note(object):
 
         if (self.midi_note_number() < 0) or (self.midi_note_number() > 127):
             raise ValueError('Invalid Note parameters, results in MIDI note number: ' + str(self.midi_note_number()))
+
+        self.duration = duration
+        self.is_dotted = is_dotted
 
     @classmethod
     def from_note_string(cls, note_string):
