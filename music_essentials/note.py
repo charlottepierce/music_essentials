@@ -159,7 +159,7 @@ class Note(object):
         """
         pitch = random.choice(Note.VALID_PITCHES)
         accidental = random.choice(Note.VALID_ACCIDENTALS)
-        octave = random.randrange(-1, 9)
+        octave = random.randrange(0, 9)
 
         return cls(pitch, octave, accidental=accidental)
 
