@@ -7,6 +7,8 @@
 # TODO: add support for triple sharps/flats
 # TODO: add support for quadruple sharps/flats
 
+import random
+
 from .interval import Interval
 
 class Note(object):
@@ -146,6 +148,20 @@ class Note(object):
             accidental = None
 
         return cls(pitch, octave, accidental)
+
+    @classmethod
+    def random_note(cls):
+        """Create and return a random Note.
+        
+        Returns:
+            :attr:`~music_essentials.note.Note`
+                A new note with a randomly selected given pitch, octave, and accidental.
+        """
+        pitch = random.choice(Note.VALID_PITCHES)
+        accidental = random.choice(Note.VALID_ACCIDENTALS)
+        octave = random.randrange(-1, 10)
+
+        return cls(pitch, octave, accidental=accidental)
 
     def midi_note_number(self):
         """Get the MIDI note number equivalent to this pitch.
