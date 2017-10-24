@@ -1,7 +1,3 @@
-# TODO: method to get vextab representation
-# TODO: add support for triple sharps/flats
-# TODO: add support for quadruple sharps/flats
-
 import random
 
 from .interval import Interval
