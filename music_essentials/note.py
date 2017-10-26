@@ -138,8 +138,15 @@ class Note(object):
         return cls(pitch, octave, accidental)
 
     @classmethod
-    def random_note(cls):
-        """Create and return a random Note.
+    def random_note(cls, lowest_octave, highest_octave):
+        """Create and return a random Note within the octave range [lowest_octave, highest_octave).
+
+        Args:
+            lowest_octave : int
+                The lowest octave allowed.
+
+            highest_octave : int
+                The highest octave allowed.
         
         Returns:
             :attr:`~music_essentials.note.Note`
@@ -147,7 +154,7 @@ class Note(object):
         """
         pitch = random.choice(Note.VALID_PITCHES)
         accidental = random.choice(Note.VALID_ACCIDENTALS)
-        octave = random.randrange(0, 9)
+        octave = random.randrange(lowest_octave, highest_octave)
 
         return cls(pitch, octave, accidental=accidental)
 
