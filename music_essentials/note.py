@@ -1,4 +1,5 @@
 import random
+import math
 
 from .interval import Interval
 
@@ -135,6 +136,50 @@ class Note(object):
         if len(accidental) == 0:
             accidental = None
 
+        return cls(pitch, octave, accidental)
+
+    @classmethod
+    def from_midi_num(cls, midi_num):
+        """Create a new note.
+        
+        Uses the provided MIDI number to set the note parameters.
+        
+        Args:
+            midi_num : int
+                A number in the range [0, 127] representing a Note.
+
+        Returns:
+            :attr:`~music_essentials.note.Note`
+                A new note with a pitch, octave, and accidental corresponding to the
+                given MIDI note number.
+        """
+        try:
+            int(midi_num) # test if octave value is a number
+        except:
+            raise TypeError('Expected integer for MIDI number, got: ' + str(midi_num))
+        if '.' in str(midi_num): # check that the number doesn't have a decimal place
+            raise TypeError('Expected integer for MIDI number, got ' + str(midi_num))
+        if (int(midi_num) < 0) or (int(midi_num) > 127):
+            raise ValueError('MIDI number needs to be in the range [0, 127], got: ' + str(midi_num))
+
+        # key = midi_num % 12; val = (pitch, accidental)
+        pitch_accidental_mappings = {
+            0 : ('C', None),
+            1 : ('C', '#'),
+            2 : ('D', None),
+            3 : ('D', '#'),
+            4 : ('E', None),
+            5 : ('F', None),
+            6 : ('F', '#'),
+            7 : ('G', None),
+            8 : ('G', '#'),
+            9 : ('A', None),
+            10 : ('A', '#'),
+            11 : ('B', None)
+        }
+
+        octave = math.floor(midi_num / 12) - 1
+        pitch, accidental = pitch_accidental_mappings[midi_num % 12]
         return cls(pitch, octave, accidental)
 
     @classmethod
