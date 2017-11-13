@@ -183,7 +183,7 @@ class Note(object):
         return cls(pitch, octave, accidental)
 
     @classmethod
-    def random_note(cls, lowest_midi_num=0, highest_midi_num=127):
+    def random_note(cls, lowest_midi_num=0, highest_midi_num=127, method='rand'):
         """Create and return a random Note within the MIDI note
         number range [lowest_midi_num, highest_midi_num].
 
@@ -193,12 +193,24 @@ class Note(object):
 
             highest_midi_num : int (default 127)
                 The highest MIDI number allowed.
-        
+
+            method : str (default 'rand')
+                The method of random selection to use.
+                If 'rand', a uniform distribution will be used.
+                If 'gauss', a gaussian distribution will be used.
+
         Returns:
             :attr:`~music_essentials.note.Note`
                 A new note with a randomly selected pitch, octave, and accidental.
         """
-        midi_num = random.randrange(lowest_midi_num, highest_midi_num + 1)
+        midi_num = -1
+        if method == 'rand':
+            midi_num = random.randrange(lowest_midi_num, highest_midi_num + 1)
+        elif method == 'gauss':
+            mean = lowest_midi_num + math.floor(((highest_midi_num - lowest_midi_num) / 2))
+            std_dev = math.floor((mean - lowest_midi_num) / 3)
+            while (midi_num < lowest_midi_num) or (midi_num > highest_midi_num):
+                midi_num = round(random.gauss(mean, std_dev))
 
         return cls.from_midi_num(midi_num)
 
