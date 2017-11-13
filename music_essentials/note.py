@@ -198,7 +198,7 @@ class Note(object):
             :attr:`~music_essentials.note.Note`
                 A new note with a randomly selected pitch, octave, and accidental.
         """
-        midi_num = random.randrange(lowest_midi_num, highest_midi_num)
+        midi_num = random.randrange(lowest_midi_num, highest_midi_num + 1)
 
         return cls.from_midi_num(midi_num)
 
