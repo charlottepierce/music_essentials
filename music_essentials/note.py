@@ -80,7 +80,7 @@ class Note(object):
             self.accidental = self.accidental.lower()
 
         if (self.midi_note_number() < 0) or (self.midi_note_number() > 127):
-            raise ValueError('Invalid Note parameters, results in MIDI note number: ' + str(self.midi_note_number()))
+            raise ValueError('Invalid Note parameters \'' + str(self.pitch) + str(self.octave) + str(self.accidental) + '\', results in MIDI note number: ' + str(self.midi_note_number()))
 
     @classmethod
     def from_note_string(cls, note_string):
