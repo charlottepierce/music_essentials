@@ -1,6 +1,7 @@
 import pytest
 
 from music_essentials import Note
+from music_essentials import Rest
 
 # Manual note creation - correct values
 def test_manual_note_creation_correct_pitch_uppercase():
@@ -26,6 +27,18 @@ def test_manual_note_creation_no_accidentals():
 def test_manual_note_creation_neg_octave():
     n = Note('C', -1)
     assert n.octave == -1
+
+def test_rest_creation_pitch():
+    r = Rest()
+    assert r.pitch == None
+
+def test_rest_creation_octave():
+    r = Rest()
+    assert r.octave == None
+
+def test_rest_creation_accidental():
+    r = Rest()
+    assert r.accidental == None
 
 # Note creation from note string - correct values
 def test_note_creation_correct_pitch_uppercase():
@@ -1034,3 +1047,52 @@ def test_midi_num_127():
     n1 = Note.from_midi_num(127)
     n2 = Note.from_note_string('G9')
     assert n1 == n2
+
+# Test note operators appropriately fail when given rests
+def test_add_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n3 = n1 + n2
+
+def test_enharmonic_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1.is_enharmonic(n2)
+
+def test_equality_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1 == n2
+
+def test_inequality_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1 != n2
+
+def test_less_than_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1 < n2
+
+def test_greater_than_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1 > n2
+
+def test_less_than_or_equal_to_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1 <= n2
+
+def test_greater_than_or_equal_to_rest():
+    n1 = Note.from_midi_num(44)
+    n2 = Rest()
+    with pytest.raises(TypeError):
+        n1 >= n2

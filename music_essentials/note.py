@@ -364,8 +364,8 @@ class Note(object):
             >>> n1.is_enharmonic(n2)
             True
         """
-        if not isinstance(other, Note):
-            raise TypeError('Expected comparator to be an instance of Note, got ' + str(other))
+        if not isinstance(other, Note) or (isinstance(other, Rest) or isinstance(self, Rest)):
+            raise TypeError('Can not determine whether ' + str(self) + ' and ' + str(other) + ' are enharmonic')
 
         return self.midi_note_number() == other.midi_note_number()
 
@@ -396,7 +396,8 @@ class Note(object):
             >>> n1 == n2
             False        
         """
-        if not isinstance(other, Note):
+
+        if not isinstance(other, Note) or (isinstance(other, Rest) or isinstance(self, Rest)):
             raise TypeError('Can not check equality between Note and \'' + str(other) + '\'')
 
         return (self.pitch == other.pitch) and (self.octave == other.octave) and (self.accidental == other.accidental)
@@ -460,7 +461,7 @@ class Note(object):
             >>> n2 < n1
             False    
         """
-        if not isinstance(other, Note):
+        if not isinstance(other, Note) or (isinstance(other, Rest) or isinstance(self, Rest)):
             raise TypeError('Can not check equality between Note and \'' + str(other) + '\'')
 
         if self.__eq__(other):
@@ -503,7 +504,7 @@ class Note(object):
             >>> n2 > n1
             True 
         """
-        if not isinstance(other, Note):
+        if not isinstance(other, Note) or (isinstance(other, Rest) or isinstance(self, Rest)):
             raise TypeError('Can not check equality between Note and \'' + str(other) + '\'')
 
         if self.__eq__(other):
