@@ -595,3 +595,24 @@ class Note(object):
             s += self.accidental
 
         return s
+
+
+class Rest(Note):
+    """A single note, defined as a period of silence."""
+
+    def __init__(self):
+        """Create a rest note. Sets the note's pitch, octave, and accidental as `None`."""
+        self.pitch = None
+        self.octave = None
+        self.accidental = None
+
+    def __str__(self):
+        """Create a string representation of the rest.
+        
+        Examples:
+            >>> r = Rest()
+            >>> print(r)
+            r
+        """
+
+        return 'r'
