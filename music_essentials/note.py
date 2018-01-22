@@ -183,7 +183,7 @@ class Note(object):
         return cls(pitch, octave, accidental)
 
     @classmethod
-    def random_note(cls, lowest_midi_num=0, highest_midi_num=127, method='rand'):
+    def random_note(cls, lowest_midi_num=0, highest_midi_num=127, method='rand', chance_for_rest=0.01):
         """Create and return a random Note within the MIDI note
         number range [lowest_midi_num, highest_midi_num].
 
@@ -203,6 +203,10 @@ class Note(object):
             :attr:`~music_essentials.note.Note`
                 A new note with a randomly selected pitch, octave, and accidental.
         """
+
+        if random.random() <= chance_for_rest:
+            return Rest()
+
         midi_num = -1
         if method == 'rand':
             midi_num = random.randrange(lowest_midi_num, highest_midi_num + 1)
