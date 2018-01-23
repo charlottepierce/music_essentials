@@ -611,6 +611,14 @@ class Rest(Note):
         self.octave = None
         self.accidental = None
 
+    def midi_note_number(self):
+        """Override the MIDI note number method from the parent class.
+
+        Returns -1 to indicate that a rest has no MIDI note number.
+        """
+
+        return -1
+
     def __str__(self):
         """Create a string representation of the rest.
         
