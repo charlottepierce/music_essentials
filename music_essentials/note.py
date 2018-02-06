@@ -86,7 +86,8 @@ class Note(object):
     def from_note_string(cls, note_string):
         """Create a new Note.
 
-        Processes the note string then uses the constructor :attr:`~music_essentials.note.Note.__init__()`
+        Processes the note string then uses the constructor :attr:`~music_essentials.note.Note.__init__()`.
+        If the note string is 'r', a :attr:`~music_essentials.note.Rest` is returned.
 
         Args:
             note_string : str
@@ -123,6 +124,9 @@ class Note(object):
         """
         if not isinstance(note_string, str):
             raise TypeError('Expected string for note string, got \'' + str(note_string + '\''))
+
+        if note_string == 'r':
+            return Rest()
 
         pitch = note_string[0]
         octave = note_string[1]
