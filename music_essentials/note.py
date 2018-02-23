@@ -75,6 +75,7 @@ class Note(object):
         self.pitch = pitch.upper()
         self.octave = int(octave)
         self.accidental = accidental
+        self.is_rest = False
 
         if accidental is not None:
             self.accidental = self.accidental.lower()
@@ -614,6 +615,7 @@ class Rest(Note):
         self.pitch = None
         self.octave = None
         self.accidental = None
+        self.is_rest = True
 
     def midi_note_number(self):
         """Override the MIDI note number method from the parent class.
