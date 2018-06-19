@@ -183,7 +183,7 @@ class Note(object):
             11 : ('B', None)
         }
 
-        octave = math.floor(midi_num / 12) - 1
+        octave = int(math.floor(midi_num / 12) - 1)
         pitch, accidental = pitch_accidental_mappings[midi_num % 12]
         return cls(pitch, octave, accidental)
 
