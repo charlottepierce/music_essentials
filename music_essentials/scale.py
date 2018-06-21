@@ -17,6 +17,7 @@ class Scale(object):
     _PHRYGIAN         = ('m2', 'm3', 'P4', 'P5', 'm6', 'm7', 'P8')
     _MAJOR_PENTATONIC = ('M2', 'M3', 'P5', 'M6', 'P8')
     _MINOR_PENTATONIC = ('m3', 'P4', 'P5', 'm7', 'P8')
+    _CHROMATIC        = ('m2', 'M2', 'm3', 'M3', 'P4', 'aug4', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8')
 
     _SCALE_PATTERNS = {
         'major'            : _MAJOR,
@@ -33,6 +34,7 @@ class Scale(object):
         'phrygian'         : _PHRYGIAN,
         'major pentatonic' : _MAJOR_PENTATONIC,
         'minor pentatonic' : _MINOR_PENTATONIC,
+        'chromatic'        : _CHROMATIC,
     }
 
     @classmethod
