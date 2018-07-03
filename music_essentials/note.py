@@ -12,7 +12,7 @@ class Note(object):
     VALID_ACCIDENTALS = ('#', '##', 'b', 'bb', None)
     """List of valid accidental representors."""
 
-    def __init__(self, pitch, octave, accidental=None, random_seed=None):
+    def __init__(self, pitch, octave, accidental=None, random_instance=random.Random()):
         """Create a new Note.
 
         Args:
@@ -72,13 +72,11 @@ class Note(object):
             if accidental.lower() not in Note.VALID_ACCIDENTALS:
                 raise ValueError('Invalid accidental: ' + str(accidental))
 
-        if random_seed is not None:
-            random.seed(random_seed)
-
         self.pitch = pitch.upper()
         self.octave = int(octave)
         self.accidental = accidental
         self.is_rest = False
+        self.random_instance = random_instance
 
         if accidental is not None:
             self.accidental = self.accidental.lower()
@@ -87,7 +85,7 @@ class Note(object):
             raise ValueError('Invalid Note parameters \'' + str(self.pitch) + str(self.octave) + str(self.accidental) + '\', results in MIDI note number: ' + str(self.midi_note_number()))
 
     @classmethod
-    def from_note_string(cls, note_string, random_seed=None):
+    def from_note_string(cls, note_string, random_instance=random.Random()):
         """Create a new Note.
 
         Processes the note string then uses the constructor :attr:`~music_essentials.note.Note.__init__()`.
@@ -144,10 +142,10 @@ class Note(object):
         if len(accidental) == 0:
             accidental = None
 
-        return cls(pitch, octave, accidental, random_seed)
+        return cls(pitch, octave, accidental, random_instance)
 
     @classmethod
-    def from_midi_num(cls, midi_num, random_seed=None):
+    def from_midi_num(cls, midi_num, random_instance=random.Random()):
         """Create a new note.
         
         Uses the provided MIDI number to set the note parameters.
@@ -188,10 +186,10 @@ class Note(object):
 
         octave = int(math.floor(midi_num / 12) - 1)
         pitch, accidental = pitch_accidental_mappings[midi_num % 12]
-        return cls(pitch, octave, accidental, random_seed)
+        return cls(pitch, octave, accidental, random_instance)
 
     @classmethod
-    def random_note(cls, lowest_midi_num=0, highest_midi_num=127, method='rand', chance_for_rest=0.01, random_seed=None):
+    def random_note(cls, lowest_midi_num=0, highest_midi_num=127, method='rand', chance_for_rest=0.01, random_instance=random.Random()):
         """Create and return a random Note within the MIDI note
         number range [lowest_midi_num, highest_midi_num].
 
@@ -212,20 +210,17 @@ class Note(object):
                 A new note with a randomly selected pitch, octave, and accidental.
         """
 
-        if random_seed is not None:
-            random.seed(random_seed)
-
-        if random.random() <= chance_for_rest:
+        if random_instance.random() <= chance_for_rest:
             return Rest()
 
         midi_num = -1
         if method == 'rand':
-            midi_num = random.randrange(lowest_midi_num, highest_midi_num + 1)
+            midi_num = random_instance.randrange(lowest_midi_num, highest_midi_num + 1)
         elif method == 'gauss':
             mean = lowest_midi_num + math.floor(((highest_midi_num - lowest_midi_num) / 2))
             std_dev = math.floor((mean - lowest_midi_num) / 3)
             while (midi_num < lowest_midi_num) or (midi_num > highest_midi_num):
-                midi_num = round(random.gauss(mean, std_dev))
+                midi_num = round(random_instance.gauss(mean, std_dev))
 
         return cls.from_midi_num(midi_num)
 
